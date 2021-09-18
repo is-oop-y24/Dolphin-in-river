@@ -8,6 +8,10 @@ namespace Isu
 {
     public class IsuService : IIsuService
     {
+        private const char FirstSymbolGroupName = 'M';
+        private const char SecondSymbolGroupName = '3';
+        private const char ThirdOrFourthMinNumberGroupName = '0';
+        private const char ThirdOrFourthMaxNumberGroupName = '9';
         private List<Group> _groups;
         public IsuService()
         {
@@ -144,8 +148,30 @@ namespace Isu
 
         private bool CorrectGroupName(string name)
         {
-            return (name[0] != 'M') || (name[1] != '3') || (name[2] < '0')
-                   || (name[2] > '9') || (name[3] < '0') || (name[3] > '9');
+            return CheckFirstSymbolGroupNumber(name) ||
+                   CheckSecondSymbolGroupNumber(name) ||
+                   CheckThirdSymbolGroupNumber(name) ||
+                   CheckFourthSymbolGroupNumber(name);
+        }
+
+        private bool CheckFirstSymbolGroupNumber(string name)
+        {
+            return name[0] != FirstSymbolGroupName;
+        }
+
+        private bool CheckSecondSymbolGroupNumber(string name)
+        {
+            return name[1] != SecondSymbolGroupName;
+        }
+
+        private bool CheckThirdSymbolGroupNumber(string name)
+        {
+            return (name[2] < ThirdOrFourthMinNumberGroupName) || (name[2] > ThirdOrFourthMaxNumberGroupName);
+        }
+
+        private bool CheckFourthSymbolGroupNumber(string name)
+        {
+            return (name[3] < ThirdOrFourthMinNumberGroupName) || (name[3] > ThirdOrFourthMaxNumberGroupName);
         }
 
         private void CorrectInput(string name)
