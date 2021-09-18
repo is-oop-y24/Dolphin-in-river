@@ -26,7 +26,7 @@ namespace Isu
         {
             if (!_groups.Contains(group))
             {
-                throw new Exception();
+                throw new IsuException();
             }
 
             var newStudent = new Student(name, group.GetName());
@@ -60,12 +60,11 @@ namespace Isu
             Student findStudent = null;
             foreach (Group group in _groups)
             {
+                findStudent = group.GetStudent(-1, name);
                 if (findStudent != null)
                 {
                     break;
                 }
-
-                findStudent = group.GetStudent(-1, name);
             }
 
             if (findStudent == null)
