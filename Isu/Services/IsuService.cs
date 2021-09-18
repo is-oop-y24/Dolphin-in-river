@@ -97,7 +97,7 @@ namespace Isu
             var resultList = new List<Student>();
             foreach (Group group in _groups)
             {
-                if (CharToInt(group) == courseNumber.GetCourseNumber())
+                if (Convert.ToInt32(group.GetName()[2]) == courseNumber.GetCourseNumber())
                 {
                     resultList = resultList.Concat(group.GetList()).ToList();
                 }
@@ -124,7 +124,7 @@ namespace Isu
             var resultList = new List<Group>();
             foreach (Group group in _groups)
             {
-                if (CharToInt(group) == courseNumber.GetCourseNumber())
+                if (Convert.ToInt32(group.GetName()[2]) == courseNumber.GetCourseNumber())
                 {
                     resultList.Add(group);
                 }
@@ -188,13 +188,6 @@ namespace Isu
                     throw new IsuException();
                 }
             }
-        }
-
-        private int CharToInt(Group @group)
-        {
-            char courseChar = group.GetName()[2];
-            int courseInt = courseChar - '0';
-            return courseInt;
         }
     }
 }
