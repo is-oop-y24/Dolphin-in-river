@@ -142,7 +142,7 @@ namespace Isu
             student.SetGroup(newGroup.GetName());
         }
 
-        private bool MyIf(string name)
+        private bool CorrectGroupName(string name)
         {
             return (name[0] != 'm' && name[0] != 'M') || (name[1] != '3') || (name[2] < '0')
                    || (name[2] > '9') || (name[3] < '0') || (name[3] > '9');
@@ -150,7 +150,7 @@ namespace Isu
 
         private void CorrectInput(string name)
         {
-            if (MyIf(name))
+            if (CorrectGroupName(name))
             {
                 throw new IsuException();
             }
