@@ -30,7 +30,7 @@ namespace Isu
         {
             if (!_groups.Contains(group))
             {
-                throw new IsuException();
+                throw new IsuException("Group don't contains in list of group");
             }
 
             var newStudent = new Student(name, group.GetName());
@@ -53,7 +53,7 @@ namespace Isu
 
             if (findStudent == null)
             {
-                throw new IsuException();
+                throw new IsuException("Student with this Id not found");
             }
 
             return findStudent;
@@ -137,7 +137,7 @@ namespace Isu
         {
             if (!_groups.Contains(newGroup))
             {
-                throw new IsuException();
+                throw new IsuException("The new Student Group isn't contains in the group list");
             }
 
             Group oldGroup = FindGroup(student.GetGroup());
@@ -185,7 +185,7 @@ namespace Isu
             {
                 if (group.GetName().Equals(name))
                 {
-                    throw new IsuException();
+                    throw new IsuException("Group with this name already exists");
                 }
             }
         }
