@@ -28,7 +28,7 @@ namespace Isu
 
         public Student AddStudent(Group group, string name)
         {
-            if (!_groups.Contains(group))
+            if (!CheckAlreadyExists(group.GetName()))
             {
                 throw new IsuException("Group don't contains in list of group");
             }
@@ -174,6 +174,20 @@ namespace Isu
             return (name[3] < ThirdOrFourthMinNumberGroupName) || (name[3] > ThirdOrFourthMaxNumberGroupName);
         }
 
+        private bool CheckAlreadyExists(string name)
+        {
+            bool flag = false; // Group not contains in list of group
+            foreach (Group group in _groups)
+            {
+                if (group.GetName().Equals(name))
+                {
+                    flag = true; // Group contains in list of group
+                }
+            }
+
+            return flag;
+        }
+
         private void CorrectInput(string name)
         {
             if (CorrectGroupName(name))
@@ -181,12 +195,9 @@ namespace Isu
                 throw new IsuException("Incorrect Input Group Name");
             }
 
-            foreach (Group group in _groups)
+            if (CheckAlreadyExists(name))
             {
-                if (group.GetName().Equals(name))
-                {
-                    throw new IsuException("Group with this name already exists");
-                }
+                throw new IsuException("Group with this name already exists");
             }
         }
     }
