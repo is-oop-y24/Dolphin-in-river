@@ -6,6 +6,7 @@ namespace Isu
 {
     public class Group
     {
+        private const int MaxStudentCount = 20;
         private readonly string _nameGroup;
 
         private List<Student> students = new List<Student>();
@@ -27,7 +28,7 @@ namespace Isu
 
         public void AddStudent(Student student)
         {
-            if (students.Count == 20)
+            if (students.Count == MaxStudentCount)
             {
                 throw new IsuException("Reach Max Student per Group");
             }
@@ -49,11 +50,11 @@ namespace Isu
         public void Delete(Student student)
         {
             int idForDelete = -1;
-            foreach (Student curStudent in students)
+            for (int i = 0; i < students.Count; i++)
             {
-                idForDelete++;
-                if (curStudent.GetID() == student.GetID())
+                if (students[i].GetID() == student.GetID())
                 {
+                    idForDelete = i;
                     break;
                 }
             }
