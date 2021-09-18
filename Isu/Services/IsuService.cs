@@ -178,7 +178,7 @@ namespace Isu
         {
             if (CorrectGroupName(name))
             {
-                throw new IsuException();
+                throw new IsuException("Incorrect Input Group Name");
             }
 
             foreach (Group group in _groups)
