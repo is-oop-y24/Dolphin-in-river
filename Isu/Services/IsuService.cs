@@ -144,7 +144,7 @@ namespace Isu
 
         private bool CorrectGroupName(string name)
         {
-            return (name[0] != 'm' && name[0] != 'M') || (name[1] != '3') || (name[2] < '0')
+            return (name[0] != 'M') || (name[1] != '3') || (name[2] < '0')
                    || (name[2] > '9') || (name[3] < '0') || (name[3] > '9');
         }
 
