@@ -49,17 +49,14 @@ namespace Isu
 
         public void Delete(Student student)
         {
-            int idForDelete = -1;
             for (int i = 0; i < students.Count; i++)
             {
                 if (students[i].GetID() == student.GetID())
                 {
-                    idForDelete = i;
+                    students.RemoveAt(i);
                     break;
                 }
             }
-
-            students.RemoveAt(idForDelete);
         }
     }
 }
