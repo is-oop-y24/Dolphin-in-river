@@ -2,16 +2,16 @@
 {
     public class Student
     {
+        private static int _nextId = 0;
         private string name;
         private int _id;
-        private int nextID = 0;
 
         private string _groupname;
         public Student(string name, string groupname)
         {
             this.name = name;
             this._groupname = groupname;
-            this._id = ++nextID;
+            this._id = ++_nextId;
         }
 
         public int GetID()
