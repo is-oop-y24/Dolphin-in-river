@@ -1,4 +1,6 @@
-﻿namespace Isu
+﻿using System;
+
+namespace Isu
 {
     internal class Program
     {
