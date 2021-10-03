@@ -9,7 +9,7 @@ namespace Shops
         private int _id;
         private string _name;
         private string _address;
-        private Dictionary<int, Procurement> _storage = new Dictionary<int, Procurement>();
+        private Dictionary<int, Supply> _storage = new Dictionary<int, Supply>();
 
         public Shop(string name, string address)
         {
@@ -28,26 +28,26 @@ namespace Shops
             }
             else
             {
-                var buff = new Procurement(product, price, amount);
+                var buff = new Supply(product, price, amount);
                 _storage.Add(product.GetId(), buff);
             }
         }
 
         public void BuyProduct(Person person, OrderForPerson order)
         {
-            foreach (Procurement currProcurement in _storage.Values)
+            foreach (Supply currSupply in _storage.Values)
             {
-                if (currProcurement.GetName().Equals(order.GetName()))
+                if (currSupply.GetName().Equals(order.GetName()))
                 {
-                    if (person.GetMoney() < currProcurement.GetPrice() * order.GetAmount())
+                    if (person.GetMoney() < currSupply.GetPrice() * order.GetAmount())
                     {
                         throw new ShopException("Not enough money to buy Product" + order.GetName());
                     }
 
-                    int buffMoney = -person.GetMoney() + (currProcurement.GetPrice() * order.GetAmount());
-                    currProcurement.ChangeAmount(order.GetAmount());
+                    int buffMoney = -person.GetMoney() + (currSupply.GetPrice() * order.GetAmount());
+                    currSupply.ChangeAmount(order.GetAmount());
                     person.MoneyAfterBuy(buffMoney);
-                    var newOrder = new OrderForPerson(order.GetAmount(), currProcurement.GetProduct());
+                    var newOrder = new OrderForPerson(order.GetAmount(), currSupply.GetProduct());
                     person.AddOrder(newOrder);
 
                     return;
@@ -59,12 +59,12 @@ namespace Shops
 
         public int NewPrice(Product product, int newPrice)
         {
-            foreach (Procurement currProcurement in _storage.Values)
+            foreach (Supply currSupply in _storage.Values)
             {
-                if (currProcurement.GetId().Equals(product.GetId()))
+                if (currSupply.GetId().Equals(product.GetId()))
                 {
-                    currProcurement.SetNewPrice(newPrice);
-                    return currProcurement.GetPrice();
+                    currSupply.SetNewPrice(newPrice);
+                    return currSupply.GetPrice();
                 }
             }
 
@@ -77,13 +77,13 @@ namespace Shops
             foreach (OrderForPerson currOrder in arrayPersonOrder)
             {
                 bool find = true;
-                foreach (Procurement currProcurement in _storage.Values)
+                foreach (Supply currSupply in _storage.Values)
                 {
-                    if (currProcurement.GetId() == currOrder.GetId())
+                    if (currSupply.GetId() == currOrder.GetId())
                     {
                         find = false;
-                        totalSum += currProcurement.GetPrice() * currOrder.GetAmount();
-                        currProcurement.ChangeAmount(currOrder.GetAmount());
+                        totalSum += currSupply.GetPrice() * currOrder.GetAmount();
+                        currSupply.ChangeAmount(currOrder.GetAmount());
                     }
                 }
 

@@ -1,12 +1,12 @@
 namespace Shops
 {
-    public class Procurement
+    public class Supply
     {
         private Product _product;
         private int _price;
         private int _amount;
 
-        public Procurement(Product product, int price, int amount)
+        public Supply(Product product, int price, int amount)
         {
             _product = product;
             _price = price;
