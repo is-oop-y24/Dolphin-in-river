@@ -125,5 +125,10 @@ namespace Shops
         {
             return _id;
         }
+
+        public string GetName()
+        {
+            return _name;
+        }
     }
 }

@@ -22,8 +22,8 @@ namespace Shops.Tests
             Shop shop1 = _shopManager.AddShop("Lenta", "Vyazemskiy 5-7");
             Product apple = _shopManager.RegisterProduct("apple");
             Product banana = _shopManager.RegisterProduct("banana");
-            shop1.AddNewProduct(100, 10, apple);
-            shop1.AddNewProduct(1000, 1, banana);
+            _shopManager.AddProductToShop(shop1, 100, 10, apple);
+            _shopManager.AddProductToShop(shop1,1000, 1, banana);
             var userOne = new Person("Ivan", 1100);
             var order = new OrderForPerson(2, apple);
             shop1.BuyProduct(userOne, order);
@@ -40,7 +40,7 @@ namespace Shops.Tests
             Setup();
             Shop shop1 = _shopManager.AddShop("Lenta", "Vyazemskiy 5-7");
             Product apple = _shopManager.RegisterProduct("apple");
-            shop1.AddNewProduct(100, 10, apple);
+            _shopManager.AddProductToShop(shop1,100, 10, apple);
             shop1.NewPrice(apple, 90);
             if (shop1.NewPrice(apple, 90) == 90)
             {
@@ -57,11 +57,11 @@ namespace Shops.Tests
             Shop shop2 = _shopManager.AddShop("Magnit", "address 2");
             Product apple = _shopManager.RegisterProduct("apple");
             Product banana = _shopManager.RegisterProduct("banana");
-            shop1.AddNewProduct(100, 10, apple);
-            shop1.AddNewProduct(1000, 1, banana);
+            _shopManager.AddProductToShop(shop1,100, 10, apple);
+            _shopManager.AddProductToShop(shop1,1000, 1, banana);
             
-            shop2.AddNewProduct(1000, 10, apple);
-            shop2.AddNewProduct(10, 100, banana);
+            _shopManager.AddProductToShop(shop2,1000, 10, apple);
+            _shopManager.AddProductToShop(shop2,10, 100, banana);
             var list = new Dictionary<int, Product>
             {
                 {11, apple},
@@ -93,9 +93,9 @@ namespace Shops.Tests
             Product apple = _shopManager.RegisterProduct("apple");
             Product banana = _shopManager.RegisterProduct("banana");
             Product potato = _shopManager.RegisterProduct("potato");
-            shop1.AddNewProduct(100, 100, apple);
-            shop1.AddNewProduct(1000, 10, banana);
-            shop1.AddNewProduct(1, 1000, potato);
+            _shopManager.AddProductToShop(shop1,100, 100, apple);
+            _shopManager.AddProductToShop(shop1,1000, 10, banana);
+            _shopManager.AddProductToShop(shop1,1, 1000, potato);
 
             var user1 = new Person("person1", 2000);
             

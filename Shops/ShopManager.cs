@@ -20,6 +20,20 @@ namespace Shops
             return currShop;
         }
 
+        public void AddProductToShop(Shop shop, int price, int amount, Product product)
+        {
+            foreach (var item in _shops)
+            {
+                if (shop.GetId() == item.GetId())
+                {
+                    shop.AddNewProduct(price, amount, product);
+                    return;
+                }
+            }
+
+            throw new ShopException("This shop with name: " + shop.GetName() + "can't be found");
+        }
+
         public Shop FindCheapBatch(Dictionary<int, Product> batch)
         {
             Shop returnShop = null;
