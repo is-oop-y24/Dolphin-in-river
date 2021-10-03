@@ -23,7 +23,7 @@ namespace Shops.Tests
             Product apple = _shopManager.RegisterProduct("apple");
             Product banana = _shopManager.RegisterProduct("banana");
             shop1.AddNewProduct(100, 10, apple);
-            shop1.AddNewProduct(1000, 1, banana); // Gold banana
+            shop1.AddNewProduct(1000, 1, banana);
             var userOne = new Person("Ivan", 1100);
             var order = new OrderForPerson(2, apple);
             shop1.BuyProduct(userOne, order);
@@ -58,9 +58,9 @@ namespace Shops.Tests
             Product apple = _shopManager.RegisterProduct("apple");
             Product banana = _shopManager.RegisterProduct("banana");
             shop1.AddNewProduct(100, 10, apple);
-            shop1.AddNewProduct(1000, 1, banana); // Gold banana
+            shop1.AddNewProduct(1000, 1, banana);
             
-            shop2.AddNewProduct(1000, 10, apple); // Gold apple
+            shop2.AddNewProduct(1000, 10, apple);
             shop2.AddNewProduct(10, 100, banana);
             var list = new Dictionary<int, Product>
             {

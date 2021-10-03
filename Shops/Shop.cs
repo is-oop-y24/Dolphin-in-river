@@ -22,7 +22,7 @@ namespace Shops
         {
             if (_storage.ContainsKey(product.GetId()))
             {
-                int newAmount = -1 * amount; // ChengeAmount() decrease amount values
+                int newAmount = -1 * amount;
                 _storage[product.GetId()].SetNewPrice(price);
                 _storage[product.GetId()].ChangeAmount(newAmount);
             }
