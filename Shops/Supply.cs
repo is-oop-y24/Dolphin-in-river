@@ -33,9 +33,14 @@ namespace Shops
             return _product.GetId();
         }
 
-        public void ChangeAmount(int amount)
+        public void RemoveProducts(int amount)
         {
             _amount -= amount;
+        }
+
+        public void AddProducts(int amount)
+        {
+            _amount += amount;
         }
 
         public Product GetProduct()

@@ -22,9 +22,8 @@ namespace Shops
         {
             if (_storage.ContainsKey(product.GetId()))
             {
-                int newAmount = -1 * amount;
                 _storage[product.GetId()].SetNewPrice(price);
-                _storage[product.GetId()].ChangeAmount(newAmount);
+                _storage[product.GetId()].AddProducts(amount);
             }
             else
             {
@@ -45,7 +44,7 @@ namespace Shops
                     }
 
                     int buffMoney = -person.GetMoney() + (currSupply.GetPrice() * order.GetAmount());
-                    currSupply.ChangeAmount(order.GetAmount());
+                    currSupply.RemoveProducts(order.GetAmount());
                     person.MoneyAfterBuy(buffMoney);
                     var newOrder = new OrderForPerson(order.GetAmount(), currSupply.GetProduct());
                     person.AddOrder(newOrder);
@@ -83,7 +82,7 @@ namespace Shops
                     {
                         find = false;
                         totalSum += currSupply.GetPrice() * currOrder.GetAmount();
-                        currSupply.ChangeAmount(currOrder.GetAmount());
+                        currSupply.RemoveProducts(currOrder.GetAmount());
                     }
                 }
 
