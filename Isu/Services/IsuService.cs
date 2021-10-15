@@ -148,10 +148,7 @@ namespace Isu
 
         private bool CorrectGroupName(string name)
         {
-            return CheckFirstSymbolGroupNumber(name) ||
-                   CheckSecondSymbolGroupNumber(name) ||
-                   CheckThirdSymbolGroupNumber(name) ||
-                   CheckFourthSymbolGroupNumber(name);
+            return name.Length == 4 || name.Length == 5;
         }
 
         private bool CheckFirstSymbolGroupNumber(string name)
@@ -190,7 +187,7 @@ namespace Isu
 
         private void CorrectInput(string name)
         {
-            if (CorrectGroupName(name))
+            if (!CorrectGroupName(name))
             {
                 throw new IsuException("Incorrect Input Group Name");
             }
