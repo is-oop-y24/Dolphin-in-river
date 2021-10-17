@@ -5,6 +5,13 @@ namespace IsuExtra
     public class Flow
     {
         private const int LongWeek = 6;
+        private const string TimeFirstLesson = "8:20";
+        private const string TimeSecondLesson = "10:00";
+        private const string TimeThirdLesson = "11:40";
+        private const string TimeFourthLesson = "13:30";
+        private const string TimeFifthLesson = "15:20";
+        private const string TimeSixthLesson = "17:00";
+        private const string TimeSeventhLesson = "18:40";
         private static int _idNext = 0;
         private int _id;
         private int _spots;
@@ -71,25 +78,25 @@ namespace IsuExtra
                 {
                     switch (ognpDaySchedule.GetStartTime())
                     {
-                        case "8:20":
+                        case TimeFirstLesson:
                             newSchedule.Lessons(i)[0] = ognpDaySchedule;
                             break;
-                        case "10:00":
+                        case TimeSecondLesson:
                             newSchedule.Lessons(i)[1] = ognpDaySchedule;
                             break;
-                        case "11:40":
+                        case TimeThirdLesson:
                             newSchedule.Lessons(i)[2] = ognpDaySchedule;
                             break;
-                        case "13:30":
+                        case TimeFourthLesson:
                             newSchedule.Lessons(i)[3] = ognpDaySchedule;
                             break;
-                        case "15:20":
+                        case TimeFifthLesson:
                             newSchedule.Lessons(i)[4] = ognpDaySchedule;
                             break;
-                        case "17:00":
+                        case TimeSixthLesson:
                             newSchedule.Lessons(i)[5] = ognpDaySchedule;
                             break;
-                        case "18:40":
+                        case TimeSeventhLesson:
                             newSchedule.Lessons(i)[6] = ognpDaySchedule;
                             break;
                     }
@@ -117,25 +124,25 @@ namespace IsuExtra
                 {
                     switch (ognpDaySchedule.GetStartTime())
                     {
-                        case "8:20":
+                        case TimeFirstLesson:
                             newSchedule.Lessons(i)[0] = new Lesson();
                             break;
-                        case "10:00":
+                        case TimeSecondLesson:
                             newSchedule.Lessons(i)[1] = new Lesson();
                             break;
-                        case "11:40":
+                        case TimeThirdLesson:
                             newSchedule.Lessons(i)[2] = new Lesson();
                             break;
-                        case "13:30":
+                        case TimeFourthLesson:
                             newSchedule.Lessons(i)[3] = new Lesson();
                             break;
-                        case "15:20":
+                        case TimeFifthLesson:
                             newSchedule.Lessons(i)[4] = new Lesson();
                             break;
-                        case "17:00":
+                        case TimeSixthLesson:
                             newSchedule.Lessons(i)[5] = new Lesson();
                             break;
-                        case "18:40":
+                        case TimeSeventhLesson:
                             newSchedule.Lessons(i)[6] = new Lesson();
                             break;
                     }
