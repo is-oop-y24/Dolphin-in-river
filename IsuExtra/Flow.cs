@@ -1,22 +1,17 @@
+using System;
 using System.Collections.Generic;
+using Isu;
 using IsuExtra.Tools;
 namespace IsuExtra
 {
     public class Flow
     {
-        private const int LongWeek = 6;
-        private const string TimeFirstLesson = "8:20";
-        private const string TimeSecondLesson = "10:00";
-        private const string TimeThirdLesson = "11:40";
-        private const string TimeFourthLesson = "13:30";
-        private const string TimeFifthLesson = "15:20";
-        private const string TimeSixthLesson = "17:00";
-        private const string TimeSeventhLesson = "18:40";
         private static int _idNext = 0;
         private int _id;
         private int _spots;
         private Schedule _schedule;
-        private List<StudentProfile> _students = new List<StudentProfile>();
+        private List<Student> _students = new List<Student>();
+
         public Flow(int spots)
         {
             _spots = spots;
@@ -33,11 +28,16 @@ namespace IsuExtra
             return _spots;
         }
 
-        public bool IsStudentInFlow(StudentProfile studentProfile)
+        public Schedule GetSchedule()
+        {
+            return _schedule;
+        }
+
+        public bool IsStudentInFlow(Student student)
         {
             foreach (var item in _students)
             {
-                if (item.GetId() == studentProfile.GetId())
+                if (item.GetID() == student.GetID())
                 {
                     return true;
                 }
@@ -56,116 +56,29 @@ namespace IsuExtra
             return _id;
         }
 
-        public List<StudentProfile> GetListStudents()
+        public List<Student> GetListStudents()
         {
             return _students;
         }
 
-        public void AddStudent(StudentProfile studentProfile)
+        public void AddStudent(Student student)
         {
             if (_schedule == null)
             {
                 throw new IsuExtraException("This flow hasn't a schedule");
             }
 
-            CheckMatches(studentProfile);
-            _students.Add(studentProfile);
-
-            Schedule newSchedule = studentProfile.GetSchedule();
-            for (int i = 0; i < LongWeek; i++)
-            {
-                foreach (Lesson ognpDaySchedule in _schedule.Lessons(i))
-                {
-                    switch (ognpDaySchedule.GetStartTime())
-                    {
-                        case TimeFirstLesson:
-                            newSchedule.Lessons(i)[0] = ognpDaySchedule;
-                            break;
-                        case TimeSecondLesson:
-                            newSchedule.Lessons(i)[1] = ognpDaySchedule;
-                            break;
-                        case TimeThirdLesson:
-                            newSchedule.Lessons(i)[2] = ognpDaySchedule;
-                            break;
-                        case TimeFourthLesson:
-                            newSchedule.Lessons(i)[3] = ognpDaySchedule;
-                            break;
-                        case TimeFifthLesson:
-                            newSchedule.Lessons(i)[4] = ognpDaySchedule;
-                            break;
-                        case TimeSixthLesson:
-                            newSchedule.Lessons(i)[5] = ognpDaySchedule;
-                            break;
-                        case TimeSeventhLesson:
-                            newSchedule.Lessons(i)[6] = ognpDaySchedule;
-                            break;
-                    }
-                }
-            }
-
-            studentProfile.SetShedule(newSchedule);
+            _students.Add(student);
         }
 
-        public void DeleteStudent(StudentProfile studentProfile)
+        public void DeleteStudent(Student student)
         {
             for (int i = 0; i < _students.Count; i++)
             {
-                if (_students[i].GetId() == studentProfile.GetId())
+                if (_students[i].GetID() == student.GetID())
                 {
                     _students.RemoveAt(i);
                     break;
-                }
-            }
-
-            var newSchedule = studentProfile.GetSchedule();
-            for (int i = 0; i < LongWeek; i++)
-            {
-                foreach (Lesson ognpDaySchedule in _schedule.Lessons(i))
-                {
-                    switch (ognpDaySchedule.GetStartTime())
-                    {
-                        case TimeFirstLesson:
-                            newSchedule.Lessons(i)[0] = new Lesson();
-                            break;
-                        case TimeSecondLesson:
-                            newSchedule.Lessons(i)[1] = new Lesson();
-                            break;
-                        case TimeThirdLesson:
-                            newSchedule.Lessons(i)[2] = new Lesson();
-                            break;
-                        case TimeFourthLesson:
-                            newSchedule.Lessons(i)[3] = new Lesson();
-                            break;
-                        case TimeFifthLesson:
-                            newSchedule.Lessons(i)[4] = new Lesson();
-                            break;
-                        case TimeSixthLesson:
-                            newSchedule.Lessons(i)[5] = new Lesson();
-                            break;
-                        case TimeSeventhLesson:
-                            newSchedule.Lessons(i)[6] = new Lesson();
-                            break;
-                    }
-                }
-            }
-
-            studentProfile.SetShedule(newSchedule);
-        }
-
-        private void CheckMatches(StudentProfile studentProfile)
-        {
-            Schedule schedule = studentProfile.GetSchedule();
-            for (int i = 0; i < LongWeek; i++)
-            {
-                foreach (Lesson userDayLesson in schedule.Lessons(i))
-                {
-                    foreach (Lesson ognpDayLesson in _schedule.Lessons(i))
-                    {
-                        if (userDayLesson.GetStartTime() == ognpDayLesson.GetStartTime() && userDayLesson.GetStartTime() != null)
-                        {
-                            throw new IsuExtraException("Find a matches of schedules");
-                        }
-                    }
                 }
             }
         }

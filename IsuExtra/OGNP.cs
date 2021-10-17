@@ -18,15 +18,14 @@ namespace IsuExtra
             _id = ++_nextId;
         }
 
-        public void AddStudent(StudentProfile studentProfile, Flow flow)
+        public void AddStudent(Student student, Flow flow)
         {
-            if (_megaFaculty.GetFirstLetter() == studentProfile.GetMegaFaculty())
+            if (_megaFaculty.GetFirstLetter() == student.GetGroup()[0])
             {
                 throw new IsuExtraException("You can't join to this OGNP");
             }
 
-            flow.AddStudent(studentProfile);
-            Student student = studentProfile.GetStudent();
+            flow.AddStudent(student);
             _registeredStudents.Add(student.GetID(), student);
         }
 

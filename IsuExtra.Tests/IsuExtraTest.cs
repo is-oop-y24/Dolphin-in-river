@@ -65,7 +65,13 @@ namespace IsuExtra.Tests
             Schedule schedule = GeneratorEmptyWeek();
             var FourthLessonTuesday = new Lesson("13:30", "15:00", "Ivanov", 111);
             var LessonsTuesday = new List<Lesson>();
+            LessonsTuesday.Add(new Lesson());
+            LessonsTuesday.Add(new Lesson());
+            LessonsTuesday.Add(new Lesson());
             LessonsTuesday.Add(FourthLessonTuesday);
+            LessonsTuesday.Add(new Lesson());
+            LessonsTuesday.Add(new Lesson());
+            LessonsTuesday.Add(new Lesson());
             var scheduleTuesday = new ScheduleDay(LessonsTuesday);
             schedule.AddInfo(1, scheduleTuesday);
             return schedule;
@@ -107,14 +113,16 @@ namespace IsuExtra.Tests
             flow1.AddSchedule(GenerateScheduleOGNP());
             
             var isuService = new IsuService();
-            Group group1 = isuService.AddGroup("R3201");
-            Student student = isuService.AddStudent(group1, "James");
 
-            var studentProfile1 = new StudentProfile(student, GenerateScheduleStudent());
+            GroupExtra groupExtra = _isuExtraService.AddGroup(isuService.AddGroup("R3201"), GenerateScheduleStudent());
+            
+            Student student = _isuExtraService.AddStudent(groupExtra, "James");
+            
             Assert.Catch<IsuExtraException>(() =>
             {
-                ognp.AddStudent(studentProfile1, flow1);
+                _isuExtraService.RegisterStudent(ognp, flow1, student);
             });
+            
         }
         
         [Test]
@@ -125,16 +133,15 @@ namespace IsuExtra.Tests
             OGNP ognp = _isuExtraService.AddOgnp(itip);
             
             Flow flow1 = ognp.AddFlow(10);
-            flow1.AddSchedule(GenerateScheduleOGNPWithOutMatching());
+            flow1.AddSchedule(GenerateScheduleOGNP());
             
             var isuService = new IsuService();
-            Group group1 = isuService.AddGroup("R3201");
-            Student student = isuService.AddStudent(group1, "James");
+
+            GroupExtra groupExtra = _isuExtraService.AddGroup(isuService.AddGroup("R3201"), GenerateScheduleStudent());
             
-            var studentProfile1 = new StudentProfile(student, GenerateScheduleStudent());
-            ognp.AddStudent(studentProfile1, flow1);
-            flow1.DeleteStudent(studentProfile1);
-            Assert.AreEqual(false, flow1.IsStudentInFlow(studentProfile1));
+            Student student = _isuExtraService.AddStudent(groupExtra, "James");
+            flow1.DeleteStudent(student);
+            Assert.AreEqual(false, flow1.IsStudentInFlow(student));
         }
         
         [Test]
@@ -157,17 +164,17 @@ namespace IsuExtra.Tests
             OGNP ognp = _isuExtraService.AddOgnp(itip);
             
             Flow flow1 = ognp.AddFlow(10);
-            flow1.AddSchedule(GenerateScheduleOGNPWithOutMatching());
+            flow1.AddSchedule(GenerateScheduleOGNP());
             
             var isuService = new IsuService();
-            Group group1 = isuService.AddGroup("R3201");
-            Student student = isuService.AddStudent(group1, "James");
-            Student student2 = isuService.AddStudent(group1, "Bond");
-            
-            var studentProfile1 = new StudentProfile(student, GenerateScheduleStudent());
-            var studentProfile2 = new StudentProfile(student2, GenerateScheduleSecondStudent());
-            ognp.AddStudent(studentProfile1, flow1);
-            ognp.AddStudent(studentProfile2, flow1);
+
+            GroupExtra groupExtra = _isuExtraService.AddGroup(isuService.AddGroup("R3201"), GenerateScheduleStudent());
+
+            Student student = _isuExtraService.AddStudent(groupExtra, "James");
+            Student student2 = _isuExtraService.AddStudent(groupExtra, "Bond");
+
+            ognp.AddStudent(student, flow1);
+            ognp.AddStudent(student2, flow1);
             Assert.AreEqual(2, flow1.GetListStudents().Count);
         }
         
@@ -179,16 +186,17 @@ namespace IsuExtra.Tests
             OGNP ognp = _isuExtraService.AddOgnp(itip);
             
             Flow flow1 = ognp.AddFlow(10);
-            flow1.AddSchedule(GenerateScheduleOGNPWithOutMatching());
+            flow1.AddSchedule(GenerateScheduleOGNP());
             
             var isuService = new IsuService();
-            Group group1 = isuService.AddGroup("R3201");
-            Student student = isuService.AddStudent(group1, "James");
-            Student student2 = isuService.AddStudent(group1, "Bond");
-            
-            var studentProfile1 = new StudentProfile(student, GenerateScheduleStudent());
-            ognp.AddStudent(studentProfile1, flow1);
-            Assert.AreEqual(1, _isuExtraService.StudentsNotJoin(group1).Count);
+
+            GroupExtra groupExtra = _isuExtraService.AddGroup(isuService.AddGroup("R3201"), GenerateScheduleStudent());
+
+            Student student = _isuExtraService.AddStudent(groupExtra, "James");
+            Student student2 = _isuExtraService.AddStudent(groupExtra, "Bond");
+            ognp.AddStudent(student, flow1);
+            Assert.AreEqual(1, _isuExtraService.StudentsNotJoin(groupExtra).Count);
         }
+        
     }
 }
