@@ -6,6 +6,6 @@ namespace IsuExtra
     {
         OGNP AddOgnp(MegaFaculty letterMegaFaculty);
         List<Student> StudentsNotJoin(Group group);
-        public bool CheckContainsOgnp(OGNP ognp);
+        bool CheckContainsOgnp(OGNP ognp);
     }
 }
