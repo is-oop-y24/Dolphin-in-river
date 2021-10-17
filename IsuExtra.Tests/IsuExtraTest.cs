@@ -93,11 +93,7 @@ namespace IsuExtra.Tests
             Setup();
             var itip = new MegaFaculty('M', "ITIP");
             OGNP ognp = _isuExtraService.AddOgnp(itip);
-            if (_isuExtraService.CheckContainsOgnp(ognp))
-            {
-                Assert.Pass();
-            }
-            Assert.Fail();
+            Assert.AreEqual(true, _isuExtraService.CheckContainsOgnp(ognp));
         }
         
         [Test]
@@ -138,11 +134,7 @@ namespace IsuExtra.Tests
             var studentProfile1 = new StudentProfile(student, GenerateScheduleStudent());
             ognp.AddStudent(studentProfile1, flow1);
             flow1.DeleteStudent(studentProfile1);
-            if (flow1.FindStudent(studentProfile1))
-            {
-                Assert.Pass();
-            }
-            Assert.Fail();
+            Assert.AreEqual(false, flow1.IsStudentInFlow(studentProfile1));
         }
         
         [Test]
@@ -154,11 +146,7 @@ namespace IsuExtra.Tests
             
             Flow flow1 = ognp.AddFlow(10);
             Flow flow2 = ognp.AddFlow(20);
-            if (ognp.GetFlows().Count == 2)
-            {
-                Assert.Pass();
-            }
-            Assert.Fail();
+            Assert.AreEqual(2, ognp.GetFlows().Count);
         }
         
         [Test]
@@ -180,11 +168,7 @@ namespace IsuExtra.Tests
             var studentProfile2 = new StudentProfile(student2, GenerateScheduleSecondStudent());
             ognp.AddStudent(studentProfile1, flow1);
             ognp.AddStudent(studentProfile2, flow1);
-            if (flow1.GetListStudents().Count == 2)
-            {
-                Assert.Pass();
-            }
-            Assert.Fail();
+            Assert.AreEqual(2, flow1.GetListStudents().Count);
         }
         
         [Test]
@@ -204,11 +188,7 @@ namespace IsuExtra.Tests
             
             var studentProfile1 = new StudentProfile(student, GenerateScheduleStudent());
             ognp.AddStudent(studentProfile1, flow1);
-            if (_isuExtraService.StudentsNotJoin(group1).Count == 1)
-            {
-                Assert.Pass();
-            }
-            Assert.Fail();
+            Assert.AreEqual(1, _isuExtraService.StudentsNotJoin(group1).Count);
         }
     }
 }

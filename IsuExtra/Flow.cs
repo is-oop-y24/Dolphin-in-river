@@ -26,17 +26,17 @@ namespace IsuExtra
             return _spots;
         }
 
-        public bool FindStudent(StudentProfile studentProfile)
+        public bool IsStudentInFlow(StudentProfile studentProfile)
         {
             foreach (var item in _students)
             {
                 if (item.GetId() == studentProfile.GetId())
                 {
-                    throw new IsuExtraException("This student wasn't deleted");
+                    return true;
                 }
             }
 
-            return true;
+            return false;
         }
 
         public void AddSchedule(Schedule schedule)
