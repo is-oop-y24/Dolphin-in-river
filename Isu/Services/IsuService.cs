@@ -8,8 +8,9 @@ namespace Isu
 {
     public class IsuService : IIsuService
     {
-        private const char FirstSymbolGroupName = 'M';
-        private const char SecondSymbolGroupName = '3';
+        private const char FirstSymbolGroupName = 'A';
+        private const char LastSymbolGroupName = 'Z';
+        private const char SecondSymbolGroupName = '1';
         private const char ThirdOrFourthMinNumberGroupName = '0';
         private const char ThirdOrFourthMaxNumberGroupName = '9';
         private List<Group> _groups;
@@ -146,22 +147,23 @@ namespace Isu
             student.SetGroup(newGroup.GetName());
         }
 
-        private bool CorrectGroupName(string name)
+        private bool InCorrectGroupName(string name)
         {
             return CheckFirstSymbolGroupNumber(name) ||
                    CheckSecondSymbolGroupNumber(name) ||
                    CheckThirdSymbolGroupNumber(name) ||
-                   CheckFourthSymbolGroupNumber(name);
+                   CheckFourthSymbolGroupNumber(name) ||
+                   CheckFifthSymbolGroupNumber(name);
         }
 
         private bool CheckFirstSymbolGroupNumber(string name)
         {
-            return name[0] != FirstSymbolGroupName;
+            return (name[0] < FirstSymbolGroupName) || (name[0] > LastSymbolGroupName);
         }
 
         private bool CheckSecondSymbolGroupNumber(string name)
         {
-            return name[1] != SecondSymbolGroupName;
+            return (name[1] < SecondSymbolGroupName) || (name[1] > ThirdOrFourthMaxNumberGroupName);
         }
 
         private bool CheckThirdSymbolGroupNumber(string name)
@@ -172,6 +174,11 @@ namespace Isu
         private bool CheckFourthSymbolGroupNumber(string name)
         {
             return (name[3] < ThirdOrFourthMinNumberGroupName) || (name[3] > ThirdOrFourthMaxNumberGroupName);
+        }
+
+        private bool CheckFifthSymbolGroupNumber(string name)
+        {
+            return (name[4] < ThirdOrFourthMinNumberGroupName) || (name[4] > ThirdOrFourthMaxNumberGroupName);
         }
 
         private bool CheckAlreadyExists(string name)
@@ -190,7 +197,7 @@ namespace Isu
 
         private void CorrectInput(string name)
         {
-            if (CorrectGroupName(name))
+            if (InCorrectGroupName(name))
             {
                 throw new IsuException("Incorrect Input Group Name");
             }
