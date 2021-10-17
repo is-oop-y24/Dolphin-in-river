@@ -46,9 +46,9 @@ namespace IsuExtra
             {
                 for (int j = 0; j < MaxNumberLesson; j++)
                 {
-                    if ((scheduleGroup.Lessons(i)[j].GetStartTime() == flowSchedule.Lessons(i)[j].GetStartTime() ||
-                         flowSchedule.Lessons(i)[j].GetStartTime() == firstOgnpSchedule.Lessons(i)[j].GetStartTime())
-                        && flowSchedule.Lessons(i)[j].GetStartTime() != null)
+                    if ((MatchGroupScheduleAndFlowSchedule(scheduleGroup.Lessons(i)[j], flowSchedule.Lessons(i)[j]) ||
+                         MatchFlowScheduleAndOgnpSchedule(flowSchedule.Lessons(i)[j], firstOgnpSchedule.Lessons(i)[j]))
+                        && CheckNotNullLesson(flowSchedule.Lessons(i)[j]))
                     {
                         throw new IsuExtraException("Find a matches of schedules");
                     }
@@ -145,6 +145,21 @@ namespace IsuExtra
             }
 
             return null;
+        }
+
+        private bool CheckNotNullLesson(Lesson lesson)
+        {
+            return lesson.GetStartTime() != null;
+        }
+
+        private bool MatchFlowScheduleAndOgnpSchedule(Lesson flowLesson, Lesson ognpLesson)
+        {
+            return flowLesson.GetStartTime() == ognpLesson.GetStartTime();
+        }
+
+        private bool MatchGroupScheduleAndFlowSchedule(Lesson scheduleLesson, Lesson flowLesson)
+        {
+            return scheduleLesson.GetStartTime() == flowLesson.GetStartTime();
         }
     }
 }
