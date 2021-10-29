@@ -14,7 +14,7 @@ namespace Backups.Tests
         
         
         [Test]
-        public void CheckCreateRestorePointsAndStorages_OnFileSystem()
+        public void CheckCreateRestorePointsAndStorages()
         {
             Setup();
             string directory1 = "C:/Users/Иван/Desktop/1.txt";
