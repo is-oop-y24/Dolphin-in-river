@@ -31,13 +31,13 @@ namespace Backups
             var files = new List<string>(_files);
             if (_configuration == "Split storage")
             {
-                var newPoint = new SplitRestorePoint(files, _points.Count, _repository, _localKeep);
+                var newPoint = new SplitRestorePoint(files, _points.Count + 1, _repository, _localKeep);
                 _points.Add(newPoint);
                 return newPoint;
             }
             else if (_configuration == "Single storage")
             {
-                var newPoint = new SingleRestorePoint(files, _points.Count, _repository, _localKeep);
+                var newPoint = new SingleRestorePoint(files, _points.Count + 1, _repository, _localKeep);
                 _points.Add(newPoint);
                 return newPoint;
             }

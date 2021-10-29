@@ -9,29 +9,20 @@ namespace Backups
     {
         private static int _nextId = 0;
         private int _id;
-        private DateTime _createDataTime;
-        private List<string> _directoryFiles;
-        private int _numberRestorePoint;
-        private Repository _repository;
-        private bool _localKeep;
         private Folder _folder;
 
         public SingleRestorePoint(List<string> directoryFiles, int numberRestorePoint, Repository repository, bool localKeep)
+            : base(directoryFiles, numberRestorePoint, repository, localKeep)
         {
             _id = ++_nextId;
-            _createDataTime = DateTime.Now;
-            _directoryFiles = directoryFiles;
-            _numberRestorePoint = numberRestorePoint;
-            _repository = repository;
-            _localKeep = localKeep;
             CreateStorage();
         }
 
-        public int AmountStorages()
+        public override int AmountStorages()
         {
-            if (_localKeep)
+            if (CurrentLocalKeep)
             {
-                return _directoryFiles.Count;
+                return DirectoryFiles.Count;
             }
             else
             {
@@ -39,31 +30,31 @@ namespace Backups
             }
         }
 
-        public string GetNameFolder()
+        public override string GetNameFolder()
         {
             return _folder.GetName();
         }
 
         private void CreateStorage()
         {
-            if (_localKeep)
+            if (CurrentLocalKeep)
             {
-                var dirInfo = new DirectoryInfo(_repository.GetPath());
-                dirInfo.CreateSubdirectory(_numberRestorePoint + "_SingleRestorePoint/");
+                var dirInfo = new DirectoryInfo(CurrentRepository.GetPath());
+                dirInfo.CreateSubdirectory(NumberRestorePoint + "_SingleRestorePoint/");
                 string archivePath =
-                    _repository.GetPath() + _numberRestorePoint + "_SingleRestorePoint/" + _id + ".zip";
+                    CurrentRepository.GetPath() + NumberRestorePoint + "_SingleRestorePoint/" + _id + ".zip";
                 ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Create);
-                foreach (string item in _directoryFiles)
+                foreach (string item in DirectoryFiles)
                 {
-                    archive.CreateEntryFromFile(item, _numberRestorePoint + "_" + GetName(item));
+                    archive.CreateEntryFromFile(item, NumberRestorePoint + "_" + GetName(item));
                 }
 
                 archive.Dispose();
             }
             else
             {
-                _folder = new Folder(_numberRestorePoint + "_SingleRestorePoint");
-                var archive = new Archive(_id + ".zip", _directoryFiles);
+                _folder = new Folder(NumberRestorePoint + "_SingleRestorePoint");
+                var archive = new Archive(_id + ".zip", DirectoryFiles);
                 var backups = new SingleBackupsInMemory(archive);
                 _folder.AddStorage(backups);
             }
