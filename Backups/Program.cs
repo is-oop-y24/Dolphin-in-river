@@ -22,7 +22,7 @@ namespace Backups
 
             backupJob.CreateRestorePoint();
 
-            backupJob.DeleteFile(directory1);
+            backupJob.DeleteFileInBackupJob(directory1);
 
             backupJob.CreateRestorePoint();
             if (backupJob.AmountPoints() != 2 && backupJob.AmountStorage() != 3)

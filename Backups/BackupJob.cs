@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Backups.Services;
 using Backups.Tools;
 
 namespace Backups
@@ -29,25 +30,25 @@ namespace Backups
             }
 
             var files = new List<string>(_files);
+            ICreateRestorePoint myPoint;
             if (_configuration == "Split storage")
             {
-                var newPoint = new SplitRestorePoint(files, _points.Count + 1, _repository, _localKeep);
-                _points.Add(newPoint);
-                return newPoint;
+                myPoint = new CreateSplitRestorePoint();
             }
             else if (_configuration == "Single storage")
             {
-                var newPoint = new SingleRestorePoint(files, _points.Count + 1, _repository, _localKeep);
-                _points.Add(newPoint);
-                return newPoint;
+                myPoint = new CreateSingleRestorePoint();
             }
             else
             {
                 throw new BackupsException("Incorrect storage format");
             }
+
+            _points.Add(myPoint.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep));
+            return myPoint.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep);
         }
 
-        public void DeleteFile(string directoryFile)
+        public void DeleteFileInBackupJob(string directoryFile)
         {
             _files.Remove(directoryFile);
         }

@@ -30,7 +30,7 @@ namespace Backups.Tests
             
             backupJob.CreateRestorePoint();
 
-            backupJob.DeleteFile(directory1);
+            backupJob.DeleteFileInBackupJob(directory1);
 
             backupJob.CreateRestorePoint();
 
