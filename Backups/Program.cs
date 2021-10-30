@@ -25,6 +25,7 @@ namespace Backups
             backupJob.DeleteFileInBackupJob(directory1);
 
             backupJob.CreateRestorePoint();
+
             if (backupJob.AmountPoints() != 2 && backupJob.AmountStorage() != 3)
             {
                 throw new BackupsException("Error with creating a backup");

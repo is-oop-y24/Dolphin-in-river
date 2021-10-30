@@ -44,8 +44,9 @@ namespace Backups
                 throw new BackupsException("Incorrect storage format");
             }
 
-            _points.Add(myPoint.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep));
-            return myPoint.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep);
+            var resultPoint = myPoint.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep);
+            _points.Add(resultPoint);
+            return resultPoint;
         }
 
         public void DeleteFileInBackupJob(string directoryFile)
