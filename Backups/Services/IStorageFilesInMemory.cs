@@ -1,6 +1,6 @@
 namespace Backups
 {
-    public interface IBackupsInMemory
+    public interface IStorageFilesInMemory
     {
         int GetAmountStorage();
     }

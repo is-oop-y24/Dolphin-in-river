@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace Backups
 {
-    public class SplitBackupsInMemory : IBackupsInMemory
+    public class SplitStorageFilesInMemory : IStorageFilesInMemory
     {
         private List<Archive> _archives;
 
-        public SplitBackupsInMemory(List<Archive> archives)
+        public SplitStorageFilesInMemory(List<Archive> archives)
         {
             _archives = archives;
         }

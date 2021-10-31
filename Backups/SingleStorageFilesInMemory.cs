@@ -1,10 +1,10 @@
 namespace Backups
 {
-    public class SingleBackupsInMemory : IBackupsInMemory
+    public class SingleStorageFilesInMemory : IStorageFilesInMemory
     {
         private Archive _archive;
 
-        public SingleBackupsInMemory(Archive archive)
+        public SingleStorageFilesInMemory(Archive archive)
         {
             _archive = archive;
         }
