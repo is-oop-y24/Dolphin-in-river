@@ -11,9 +11,9 @@ namespace Backups
         {
         }
 
-        public BackupJob CreateBackupJob(List<string> file, string configuration, string path, bool localKeep)
+        public BackupJob CreateBackupJob(List<string> file, ICreateRestorePoint point, string path, bool localKeep)
         {
-            var backup = new BackupJob(file, configuration, path, localKeep);
+            var backup = new BackupJob(file, point, path, localKeep);
             _backups.Add(backup);
             return backup;
         }

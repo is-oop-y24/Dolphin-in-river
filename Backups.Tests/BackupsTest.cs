@@ -26,7 +26,8 @@ namespace Backups.Tests
             };
 
             bool localKeep = false;
-            BackupJob backupJob = _backupService.CreateBackupJob(listFile, "Single storage", "LocalKeep", localKeep);
+            ICreateRestorePoint newPoint = new CreateSingleRestorePoint();
+            BackupJob backupJob = _backupService.CreateBackupJob(listFile, newPoint, "LocalKeep", localKeep);
             
             backupJob.CreateRestorePoint();
 

@@ -4,6 +4,6 @@ namespace Backups.Services
 {
     public interface IBackupService
     {
-        BackupJob CreateBackupJob(List<string> file, string configuration, string path, bool localKeep);
+        BackupJob CreateBackupJob(List<string> file, ICreateRestorePoint point, string path, bool localKeep);
     }
 }

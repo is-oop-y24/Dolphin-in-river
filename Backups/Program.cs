@@ -16,7 +16,8 @@ namespace Backups
             };
 
             bool localKeep = true;
-            var backupJob = new BackupJob(listFile, "Split storage", "C:/Users/Иван/Desktop/", localKeep);
+            ICreateRestorePoint point = new CreateSplitRestorePoint();
+            var backupJob = new BackupJob(listFile, point, "C:/Users/Иван/Desktop/", localKeep);
 
             backupJob.CreateRestorePoint();
 

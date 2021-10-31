@@ -10,14 +10,14 @@ namespace Backups
     {
         private List<IRestorePoint> _points = new List<IRestorePoint>();
         private List<string> _files;
-        private string _configuration;
+        private ICreateRestorePoint _point;
         private Repository _repository = null;
         private bool _localKeep;
 
-        public BackupJob(List<string> file, string configuration, string path, bool localKeep)
+        public BackupJob(List<string> file, ICreateRestorePoint point, string path, bool localKeep)
         {
             _files = file;
-            _configuration = configuration;
+            _point = point;
             _localKeep = localKeep;
             _repository = new Repository(path);
         }
@@ -30,23 +30,7 @@ namespace Backups
             }
 
             var files = new List<string>(_files);
-
-            ICreateRestorePoint currentPoint;
-
-            if (_configuration == "Split storage")
-            {
-                currentPoint = new CreateSplitRestorePoint();
-            }
-            else if (_configuration == "Single storage")
-            {
-                currentPoint = new CreateSingleRestorePoint();
-            }
-            else
-            {
-                throw new BackupsException("Incorrect storage format");
-            }
-
-            IRestorePoint resultPoint = currentPoint.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep);
+            IRestorePoint resultPoint = _point.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep);
             _points.Add(resultPoint);
             return resultPoint;
         }
