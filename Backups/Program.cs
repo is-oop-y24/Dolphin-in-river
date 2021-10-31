@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Backups.Tools;
 
 namespace Backups
@@ -26,7 +24,7 @@ namespace Backups
 
             backupJob.CreateRestorePoint();
 
-            if (backupJob.AmountPoints() != 2 && backupJob.AmountStorage() != 3)
+            if (backupJob.AmountPoints() != 2 || backupJob.AmountStorage() != 3)
             {
                 throw new BackupsException("Error with creating a backup");
             }
