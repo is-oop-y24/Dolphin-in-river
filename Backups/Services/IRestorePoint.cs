@@ -14,6 +14,11 @@ namespace Backups
             CurrentLocalKeep = localKeep;
         }
 
+        public Repository CurrentRepository
+        {
+            get;
+        }
+
         protected DateTime CreateDataTime
         {
             get;
@@ -29,17 +34,9 @@ namespace Backups
             get;
         }
 
-        protected Repository CurrentRepository
-        {
-            get;
-        }
-
         protected bool CurrentLocalKeep
         {
             get;
         }
-
-        public abstract int AmountStorages();
-        public abstract string GetNameFolder();
     }
 }

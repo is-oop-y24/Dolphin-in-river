@@ -30,21 +30,23 @@ namespace Backups
             }
 
             var files = new List<string>(_files);
-            ICreateRestorePoint myPoint;
+
+            ICreateRestorePoint currentPoint;
+
             if (_configuration == "Split storage")
             {
-                myPoint = new CreateSplitRestorePoint();
+                currentPoint = new CreateSplitRestorePoint();
             }
             else if (_configuration == "Single storage")
             {
-                myPoint = new CreateSingleRestorePoint();
+                currentPoint = new CreateSingleRestorePoint();
             }
             else
             {
                 throw new BackupsException("Incorrect storage format");
             }
 
-            var resultPoint = myPoint.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep);
+            IRestorePoint resultPoint = currentPoint.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep);
             _points.Add(resultPoint);
             return resultPoint;
         }
@@ -61,18 +63,7 @@ namespace Backups
 
         public int AmountStorage()
         {
-            int amountStorage = 0;
-            foreach (var item in _points)
-            {
-                amountStorage += item.AmountStorages();
-            }
-
-            return amountStorage;
-        }
-
-        public string GetNameFolder(IRestorePoint restorePoint)
-        {
-            return restorePoint.GetNameFolder();
+            return _repository.GetCount();
         }
     }
 }
