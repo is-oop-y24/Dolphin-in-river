@@ -17,23 +17,23 @@ namespace Banks
         {
         }
 
-        public void AddName(string name)
+        public void SetName(string name)
         {
             _name = name;
         }
 
-        public void AddSurname(string surname)
+        public void SetSurname(string surname)
         {
             _surname = surname;
         }
 
-        public void AddAddress(string address)
+        public void SetAddress(string address)
         {
             _address = address;
             CheckNotRequireFields();
         }
 
-        public void AddPassportNumber(int number)
+        public void SetPassportNumber(int number)
         {
             _passportNumber = number;
             CheckNotRequireFields();
