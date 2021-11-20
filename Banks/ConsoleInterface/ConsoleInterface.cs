@@ -241,10 +241,10 @@ namespace Banks
             switch (typeAccountCreator)
             {
                 case "Add Money":
-                    _centralBank.MakeTransaction(new CreateAddMoneyOperation(giver, money));
+                    _centralBank.MakeTransaction(new FactoryCreateAddMoneyOperation(giver, money));
                     break;
                 case "With Draw":
-                    _centralBank.MakeTransaction(new CreateWithDrawOperation(giver, money));
+                    _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(giver, money));
                     break;
                 case "Transfer Money between accounts":
                     AbstractAccount sender = FindAccount();
@@ -253,7 +253,7 @@ namespace Banks
                         throw new BanksException("You couldn't transfer money for your account");
                     }
 
-                    _centralBank.MakeTransaction(new CreateTransfer(sender, giver, money));
+                    _centralBank.MakeTransaction(new FactoryCreateTransfer(sender, giver, money));
                     break;
                 default:
                     throw new BanksException("Error in input data");
@@ -379,19 +379,19 @@ namespace Banks
                             .PageSize(typesAccount.Count)
                             .AddChoices(typesAccount));
                     double money = AnsiConsole.Ask<double>("How many money do you want to put to account? ");
-                    AbstractCreateAccount createAccount;
+                    FactoryAbstractCreateAccount createAccount;
                     switch (typeAccountCreator)
                     {
                         case "Debit":
-                            createAccount = new CreateDebitAccount(money);
+                            createAccount = new FactoryCreateDebitAccount(money);
                             break;
                         case "Deposit":
                             int finishDay =
                                 AnsiConsole.Ask<int>("For how many days do you want to open a Deposit Account = ");
-                            createAccount = new CreateDepositAccount(money, DateTime.Today.AddDays(finishDay));
+                            createAccount = new FactoryCreateDepositAccount(money, DateTime.Today.AddDays(finishDay));
                             break;
                         case "Credit":
-                            createAccount = new CreateCreditAccount(money);
+                            createAccount = new FactoryCreateCreditAccount(money);
                             break;
                         default:
                             throw new BanksException("Error in input data");

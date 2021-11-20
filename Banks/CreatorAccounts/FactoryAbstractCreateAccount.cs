@@ -2,9 +2,9 @@ using Banks.Tools;
 
 namespace Banks
 {
-    public abstract class AbstractCreateAccount
+    public abstract class FactoryAbstractCreateAccount
     {
-        protected AbstractCreateAccount(double money)
+        protected FactoryAbstractCreateAccount(double money)
         {
             Money = money;
         }

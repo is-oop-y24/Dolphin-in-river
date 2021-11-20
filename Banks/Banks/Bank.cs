@@ -88,7 +88,7 @@ namespace Banks
             }
         }
 
-        public AbstractAccount AddClientAndLinkAccount(Client client, AbstractCreateAccount createAccount)
+        public AbstractAccount AddClientAndLinkAccount(Client client, FactoryAbstractCreateAccount createAccount)
         {
             createAccount.AddData(Data);
             AbstractAccount newAccount = createAccount.Create(client);

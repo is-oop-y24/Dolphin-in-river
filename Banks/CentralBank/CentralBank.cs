@@ -76,7 +76,7 @@ namespace Banks
             return names;
         }
 
-        public ITransaction MakeTransaction(ICreatorTransaction creatorTransaction)
+        public ITransaction MakeTransaction(IFactoryCreatorTransaction creatorTransaction)
         {
             ITransaction transaction = creatorTransaction.Create();
             if (transaction.GetTypeTransaction() == "Transfer")
@@ -104,7 +104,7 @@ namespace Banks
             throw new BanksException("This account don't exists");
         }
 
-        public AbstractAccount AddClientAndLinkAccount(Bank bank, Client client, AbstractCreateAccount createAccount)
+        public AbstractAccount AddClientAndLinkAccount(Bank bank, Client client, FactoryAbstractCreateAccount createAccount)
         {
             return bank.AddClientAndLinkAccount(client, createAccount);
         }

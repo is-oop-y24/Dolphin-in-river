@@ -1,8 +1,8 @@
 namespace Banks
 {
-    public class CreateDebitAccount : AbstractCreateAccount
+    public class FactoryCreateCreditAccount : FactoryAbstractCreateAccount
     {
-        public CreateDebitAccount(double money)
+        public FactoryCreateCreditAccount(double money)
             : base(money)
         {
         }
@@ -11,7 +11,7 @@ namespace Banks
         {
             CheckCorrectData();
 
-            return new DebitAccount(Data, Money, client);
+            return new CreditAccount(Data, Money, client);
         }
     }
 }
