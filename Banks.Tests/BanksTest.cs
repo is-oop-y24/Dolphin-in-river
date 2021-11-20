@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Banks.BankBuilder;
 using Banks.Tools;
 using NUnit.Framework;
 
@@ -44,8 +45,12 @@ namespace Banks.Tests
         {
             Assert.Catch<BanksException>(() =>
             {
-                Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                    _criticalSum);
+                var bankBuilder = new ConcreteBankBuilder();
+                Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                    .BuildDepositInfo(_depositInfo)
+                    .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                    .BuildCriticalSum(_criticalSum).GetResult();
+                _centralBank.AddBank(bank);
                 var clientBuilder = new ConcreteClientBuilder();
                 Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                     .GetResult();
@@ -60,8 +65,12 @@ namespace Banks.Tests
         [Test]
         public void WithDrawMoneyOnSafeAccount()
         {
-            Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                _criticalSum);
+            var bankBuilder = new ConcreteBankBuilder();
+            Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                .BuildDepositInfo(_depositInfo)
+                .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                .BuildCriticalSum(_criticalSum).GetResult();
+            _centralBank.AddBank(bank);
             var clientBuilder = new ConcreteClientBuilder();
             Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                 .BuildPassportNumber(123123)
@@ -75,8 +84,12 @@ namespace Banks.Tests
         [Test]
         public void CheckCountMoneyOnDebitAccount()
         {
-            Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                _criticalSum);
+            var bankBuilder = new ConcreteBankBuilder();
+            Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                .BuildDepositInfo(_depositInfo)
+                .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                .BuildCriticalSum(_criticalSum).GetResult();
+            _centralBank.AddBank(bank);
             var clientBuilder = new ConcreteClientBuilder();
             Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                 .BuildPassportNumber(123123)
@@ -92,8 +105,12 @@ namespace Banks.Tests
         [Test]
         public void CheckCountMoneyOnDepositAccount()
         {
-            Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                _criticalSum);
+            var bankBuilder = new ConcreteBankBuilder();
+            Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                .BuildDepositInfo(_depositInfo)
+                .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                .BuildCriticalSum(_criticalSum).GetResult();
+            _centralBank.AddBank(bank);
             var clientBuilder = new ConcreteClientBuilder();
             Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                 .BuildPassportNumber(123123)
@@ -110,8 +127,12 @@ namespace Banks.Tests
         [Test]
         public void CheckCountMoneyOnCreditAccount()
         {
-            Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                _criticalSum);
+            var bankBuilder = new ConcreteBankBuilder();
+            Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                .BuildDepositInfo(_depositInfo)
+                .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                .BuildCriticalSum(_criticalSum).GetResult();
+            _centralBank.AddBank(bank);
             var clientBuilder = new ConcreteClientBuilder();
             Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                 .BuildPassportNumber(123123)
@@ -130,8 +151,12 @@ namespace Banks.Tests
         {
             Assert.Catch<BanksException>(() =>
             {
-                Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                    _criticalSum);
+                var bankBuilder = new ConcreteBankBuilder();
+                Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                    .BuildDepositInfo(_depositInfo)
+                    .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                    .BuildCriticalSum(_criticalSum).GetResult();
+                _centralBank.AddBank(bank);
                 var clientBuilder = new ConcreteClientBuilder();
                 Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                     .BuildPassportNumber(123123)
@@ -148,8 +173,12 @@ namespace Banks.Tests
         [Test]
         public void WithDrawMoneyOnDepositAccountAfterFinishDay()
         {
-            Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                _criticalSum);
+            var bankBuilder = new ConcreteBankBuilder();
+            Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                .BuildDepositInfo(_depositInfo)
+                .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                .BuildCriticalSum(_criticalSum).GetResult();
+            _centralBank.AddBank(bank);
             var clientBuilder = new ConcreteClientBuilder();
             Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                 .BuildPassportNumber(123123)
@@ -166,8 +195,12 @@ namespace Banks.Tests
         [Test]
         public void CancelTransactionBetweenAccounts()
         {
-            Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                _criticalSum);
+            var bankBuilder = new ConcreteBankBuilder();
+            Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                .BuildDepositInfo(_depositInfo)
+                .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                .BuildCriticalSum(_criticalSum).GetResult();
+            _centralBank.AddBank(bank);
             var clientBuilder = new ConcreteClientBuilder();
             Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                 .BuildPassportNumber(123123)
@@ -187,8 +220,12 @@ namespace Banks.Tests
         [Test]
         public void MakeChangeInConditions()
         {
-            Bank bank = _centralBank.AddBank(_bankName,  _debitPercent, _depositInfo, _creditLimit, _creditCommission,
-                _criticalSum);
+            var bankBuilder = new ConcreteBankBuilder();
+            Bank bank = bankBuilder.BuildName(_bankName).BuildDebitPercent(_debitPercent)
+                .BuildDepositInfo(_depositInfo)
+                .BuildCreditLimit(_creditLimit).BuildCreditCommission(_creditCommission)
+                .BuildCriticalSum(_criticalSum).GetResult();
+            _centralBank.AddBank(bank);
             var clientBuilder = new ConcreteClientBuilder();
             Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                 .BuildPassportNumber(123123)

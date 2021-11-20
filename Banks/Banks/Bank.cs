@@ -8,6 +8,11 @@ namespace Banks
         private static int nextId = 1;
         private List<Client> _clients = new List<Client>();
 
+        public Bank()
+        {
+            Data = new BankData();
+        }
+
         public Bank(string bankName, double debitPercent, DepositInfo depositInfo, double creditLimit, double creditCommission, double criticalSum)
         {
             Id = nextId++;
@@ -29,6 +34,32 @@ namespace Banks
         public string Name
         {
             get;
+            set;
+        }
+
+        public void SetDebitPercent(double debitPercent)
+        {
+            Data.DebitPercent = debitPercent;
+        }
+
+        public void SetDepositInfo(DepositInfo depositInfo)
+        {
+            Data.InfoDeposit = depositInfo;
+        }
+
+        public void SetCreditLimit(double creditLimit)
+        {
+            Data.CreditLimit = creditLimit;
+        }
+
+        public void SetCreditCommission(double creditCommission)
+        {
+            Data.CreditCommission = creditCommission;
+        }
+
+        public void SetCriticalSum(double criticalSum)
+        {
+            Data.CriticalSum = criticalSum;
         }
 
         public void ChangeDebitInfo(double debitPercent)

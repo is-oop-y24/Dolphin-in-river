@@ -30,6 +30,19 @@ namespace Banks
             return newBank;
         }
 
+        public void AddBank(Bank bank)
+        {
+            foreach (Bank item in _banks)
+            {
+                if (bank.Name == item.Name)
+                {
+                    throw new BanksException("Bank with same name is already registered");
+                }
+            }
+
+            _banks.Add(bank);
+        }
+
         public void UpdateMoneyInformation(DateTime newDate)
         {
             if (newDate.Subtract(_nowDate).Days < 0)

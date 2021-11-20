@@ -2,6 +2,10 @@ namespace Banks
 {
     public class BankData
     {
+        public BankData()
+        {
+        }
+
         public BankData(double debitPercent, DepositInfo depositPercent, double creditLimit, double creditCommission, double criticalSum)
         {
             DebitPercent = debitPercent;
@@ -14,31 +18,31 @@ namespace Banks
         public double CreditLimit
         {
             get;
-            private set;
+            set;
         }
 
         public double CreditCommission
         {
             get;
-            private set;
+            set;
         }
 
         public double CriticalSum
         {
             get;
-            private set;
+            set;
         }
 
         public double DebitPercent
         {
             get;
-            private set;
+            set;
         }
 
         public DepositInfo InfoDeposit
         {
             get;
-            private set;
+            set;
         }
 
         public void SetDebitPercent(double debitPercent)

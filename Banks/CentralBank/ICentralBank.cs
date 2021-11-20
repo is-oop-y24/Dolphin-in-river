@@ -8,6 +8,7 @@ namespace Banks
         void UpdateMoneyInformation(DateTime newDate);
         ITransaction MakeTransaction(IFactoryCreatorTransaction creatorTransaction);
         void CancelTransaction(ITransaction transaction);
+        void AddBank(Bank bank);
         List<Bank> GetBanks();
         List<string> GetBanksNames();
         List<string> GetNamesTransaction();
