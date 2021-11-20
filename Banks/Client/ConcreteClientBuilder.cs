@@ -12,27 +12,33 @@ namespace Banks
             _client = new Client();
         }
 
+        public ConcreteClientBuilder(string name, string surname, string address = default, int passportNumber = default)
+        {
+            _client = new Client();
+            BuildName(name).BuildSurname(surname).BuildAddress(address).BuildPassportNumber(passportNumber);
+        }
+
         public IClientBuilder BuildName(string name)
         {
-            _client.AddName(name);
+            _client.SetName(name);
             return this;
         }
 
         public IClientBuilder BuildSurname(string surname)
         {
-            _client.AddSurname(surname);
+            _client.SetSurname(surname);
             return this;
         }
 
         public IClientBuilder BuildAddress(string address)
         {
-            _client.AddAddress(address);
+            _client.SetAddress(address);
             return this;
         }
 
         public IClientBuilder BuildPassportNumber(int passportNumber)
         {
-            _client.AddPassportNumber(passportNumber);
+            _client.SetPassportNumber(passportNumber);
             return this;
         }
 
