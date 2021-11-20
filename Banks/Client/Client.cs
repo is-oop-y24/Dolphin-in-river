@@ -6,11 +6,10 @@ namespace Banks
     public class Client
     {
         private List<AbstractAccount> _accounts = new List<AbstractAccount>();
-        private string _name = " ";
-        private string _surname = " ";
-        private string _address = " ";
+        private string _name;
+        private string _surname;
+        private string _address;
         private int _passportNumber = -1;
-        private bool _safely = false;
         private bool _flagNotification = false;
 
         public Client()
@@ -59,17 +58,14 @@ namespace Banks
             return _passportNumber;
         }
 
-        public bool GetSafely()
-        {
-            return _safely;
-        }
-
-        public void CheckNotRequireFields()
+        public bool CheckNotRequireFields()
         {
             if (GetAddress() != " " && GetPassportNumber() != -1)
             {
-                _safely = true;
+                return true;
             }
+
+            return false;
         }
 
         public void RemoveAccount(AbstractAccount account)

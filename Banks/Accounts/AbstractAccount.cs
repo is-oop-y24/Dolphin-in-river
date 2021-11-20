@@ -163,7 +163,7 @@ namespace Banks
 
         private bool GetSafely()
         {
-            return _client.GetSafely();
+            return _client.CheckNotRequireFields();
         }
     }
 }
