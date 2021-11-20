@@ -9,14 +9,14 @@ namespace Banks
         private double _money;
         private bool _isCanceled = false;
         private int _id;
-        private string _type;
+        private TypeTransactions _type;
 
         public WithDrawMoney(AbstractAccount account, double money)
         {
             _account = account;
             _money = money;
             _id = _nextId++;
-            _type = "WithDraw";
+            _type = TypeTransactions.WithDraw;
             DoTransact();
         }
 
@@ -36,7 +36,7 @@ namespace Banks
             return _account.GetClient().GetName() + _id;
         }
 
-        public string GetTypeTransaction()
+        public TypeTransactions GetTypeTransaction()
         {
             return _type;
         }

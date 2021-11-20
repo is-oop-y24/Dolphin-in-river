@@ -34,25 +34,25 @@ namespace Banks
         public void ChangeDebitInfo(double debitPercent)
         {
             Data.SetDebitPercent(debitPercent);
-            NotifyObservers("Debit");
+            NotifyObservers(TypeAccounts.Debit);
         }
 
         public void ChangeDepositInfo(DepositInfo depositInfo)
         {
             Data.SetDepositPercent(depositInfo);
-            NotifyObservers("Deposit");
+            NotifyObservers(TypeAccounts.Deposit);
         }
 
         public void ChangeCreditInfo(double creditLimit, double creditCommission)
         {
             Data.SetCreditInfo(creditLimit, creditCommission);
-            NotifyObservers("Credit");
+            NotifyObservers(TypeAccounts.Credit);
         }
 
         public void ChangeCriticalSum(double criticalSum)
         {
             Data.SetCriticalSum(criticalSum);
-            NotifyObservers("AllType");
+            NotifyObservers(TypeAccounts.AllType);
         }
 
         public List<Client> GetClients()
@@ -72,13 +72,13 @@ namespace Banks
             return clientsName;
         }
 
-        public void NotifyObservers(string typeAccount)
+        public void NotifyObservers(TypeAccounts typeAccount)
         {
             foreach (Client client in _clients)
             {
                 foreach (AbstractAccount item in client.GetAccounts())
                 {
-                    if (item.TypeAccount == typeAccount || typeAccount == "AllType")
+                    if (item.TypeAccount.Equals(typeAccount) || typeAccount.Equals(TypeAccounts.AllType))
                     {
                         client.NotifyChangesConditions();
                         client.ChangeConditionInBank(Data);

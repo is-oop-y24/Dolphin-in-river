@@ -11,7 +11,7 @@ namespace Banks
         private double _money;
         private bool _isCanceled = false;
         private int _id;
-        private string _type;
+        private TypeTransactions _type;
 
         public Transfer(AbstractAccount sender, AbstractAccount giver, double money)
         {
@@ -19,7 +19,7 @@ namespace Banks
             _giver = giver;
             _money = money;
             _id = _nextId++;
-            _type = "Transfer";
+            _type = TypeTransactions.Transfer;
             DoTransact();
         }
 
@@ -28,7 +28,7 @@ namespace Banks
             return _id;
         }
 
-        public string GetTypeTransaction()
+        public TypeTransactions GetTypeTransaction()
         {
             return _type;
         }

@@ -9,13 +9,13 @@ namespace Banks
         private double _money;
         private bool _isCanceled = false;
         private int _id;
-        private string _type;
+        private TypeTransactions _type;
         public AddMoney(AbstractAccount account, double money)
         {
             _account = account;
             _money = money;
             _id = _nextId++;
-            _type = "AddMoney";
+            _type = TypeTransactions.AddMoney;
             DoTransact();
         }
 
@@ -29,7 +29,7 @@ namespace Banks
             return _id;
         }
 
-        public string GetTypeTransaction()
+        public TypeTransactions GetTypeTransaction()
         {
             return _type;
         }

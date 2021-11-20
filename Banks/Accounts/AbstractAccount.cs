@@ -3,6 +3,14 @@ using Banks.Tools;
 
 namespace Banks
 {
+    public enum TypeAccounts
+    {
+        Debit,
+        Deposit,
+        Credit,
+        AllType,
+    }
+
     public abstract class AbstractAccount
     {
         protected const int MakePercent = 100;
@@ -12,7 +20,7 @@ namespace Banks
         private Client _client;
         private int _id;
 
-        protected AbstractAccount(BankData data, double money, Client client)
+        protected AbstractAccount(BankData data, double money, Client client, TypeAccounts type)
         {
             Money = money;
             CriticalSum = data.CriticalSum;
@@ -20,12 +28,12 @@ namespace Banks
             _id = _nextId++;
             _client = client;
             LastChangedDays = 0;
+            TypeAccount = type;
         }
 
-        public string TypeAccount
+        public TypeAccounts TypeAccount
         {
             get;
-            protected set;
         }
 
         public double CriticalSum
@@ -107,7 +115,7 @@ namespace Banks
 
         public string GetInformation()
         {
-            return TypeAccount + GetId();
+            return GetId().ToString();
         }
 
         protected void CheckWithDrawSuspicion(double sum)

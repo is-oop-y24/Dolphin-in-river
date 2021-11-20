@@ -7,11 +7,10 @@ namespace Banks
     {
         private bool _usedLimit = false;
         public CreditAccount(BankData data, double money, Client client)
-            : base(data, money, client)
+            : base(data, money, client, TypeAccounts.Credit)
         {
             CreditLimit = data.CreditLimit;
             CreditCommission = data.CreditCommission / YearDay;
-            TypeAccount = "Credit";
         }
 
         public override void UpdateAmount(DateTime newDate)

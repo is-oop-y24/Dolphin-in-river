@@ -5,10 +5,9 @@ namespace Banks
     public class DebitAccount : AbstractAccount
     {
         public DebitAccount(BankData data, double money, Client client)
-            : base(data, money, client)
+            : base(data, money, client, TypeAccounts.Debit)
         {
             DebitPercent = data.DebitPercent / (MakePercent * YearDay);
-            TypeAccount = "Debit";
         }
 
         public override void WithDraw(double sum)

@@ -79,7 +79,7 @@ namespace Banks
         public ITransaction MakeTransaction(IFactoryCreatorTransaction creatorTransaction)
         {
             ITransaction transaction = creatorTransaction.Create();
-            if (transaction.GetTypeTransaction() == "Transfer")
+            if (transaction.GetTypeTransaction().Equals(TypeTransactions.Transfer))
             {
                 var transfer = (Transfer)transaction;
                 CheckExistsAccount(transfer.GetSender(), transfer.GetGiver());

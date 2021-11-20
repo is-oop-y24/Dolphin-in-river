@@ -1,11 +1,18 @@
 namespace Banks
 {
+    public enum TypeTransactions
+    {
+        AddMoney,
+        WithDraw,
+        Transfer,
+    }
+
     public interface ITransaction
     {
         void Cancel();
         int GetId();
 
-        string GetTypeTransaction();
+        TypeTransactions GetTypeTransaction();
         string GetInformation();
     }
 }

@@ -6,10 +6,9 @@ namespace Banks
     public class DepositAccount : AbstractAccount
     {
         public DepositAccount(BankData data, double money, DateTime finishDay, Client client)
-            : base(data, money, client)
+            : base(data, money, client, TypeAccounts.Deposit)
         {
             InfoDeposit = data.InfoDeposit;
-            TypeAccount = "Deposit";
             FinishDay = finishDay;
         }
 
