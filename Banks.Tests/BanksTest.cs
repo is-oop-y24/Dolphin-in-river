@@ -44,7 +44,6 @@ namespace Banks.Tests
         {
             Assert.Catch<BanksException>(() =>
             {
-                Setup();
                 Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                     _criticalSum);
                 var clientBuilder = new ConcreteClientBuilder();
@@ -61,7 +60,6 @@ namespace Banks.Tests
         [Test]
         public void WithDrawMoneyOnSafeAccount()
         {
-            Setup();
             Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                 _criticalSum);
             var clientBuilder = new ConcreteClientBuilder();
@@ -77,7 +75,6 @@ namespace Banks.Tests
         [Test]
         public void CheckCountMoneyOnDebitAccount()
         {
-            Setup();
             Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                 _criticalSum);
             var clientBuilder = new ConcreteClientBuilder();
@@ -95,7 +92,6 @@ namespace Banks.Tests
         [Test]
         public void CheckCountMoneyOnDepositAccount()
         {
-            Setup();
             Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                 _criticalSum);
             var clientBuilder = new ConcreteClientBuilder();
@@ -114,7 +110,6 @@ namespace Banks.Tests
         [Test]
         public void CheckCountMoneyOnCreditAccount()
         {
-            Setup();
             Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                 _criticalSum);
             var clientBuilder = new ConcreteClientBuilder();
@@ -135,7 +130,6 @@ namespace Banks.Tests
         {
             Assert.Catch<BanksException>(() =>
             {
-                Setup();
                 Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                     _criticalSum);
                 var clientBuilder = new ConcreteClientBuilder();
@@ -154,7 +148,6 @@ namespace Banks.Tests
         [Test]
         public void WithDrawMoneyOnDepositAccountAfterFinishDay()
         {
-            Setup();
             Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                 _criticalSum);
             var clientBuilder = new ConcreteClientBuilder();
@@ -173,7 +166,6 @@ namespace Banks.Tests
         [Test]
         public void CancelTransactionBetweenAccounts()
         {
-            Setup();
             Bank bank = _centralBank.AddBank(_bankName, _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                 _criticalSum);
             var clientBuilder = new ConcreteClientBuilder();
@@ -195,7 +187,6 @@ namespace Banks.Tests
         [Test]
         public void MakeChangeInConditions()
         {
-            Setup();
             Bank bank = _centralBank.AddBank(_bankName,  _debitPercent, _depositInfo, _creditLimit, _creditCommission,
                 _criticalSum);
             var clientBuilder = new ConcreteClientBuilder();
