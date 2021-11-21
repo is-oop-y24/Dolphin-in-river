@@ -1,12 +1,12 @@
 namespace Banks
 {
-    public class FactoryCreateTransfer : IFactoryCreatorTransaction
+    public class TransferFactory : ITransactionFactory
     {
         private AbstractAccount _sender;
         private AbstractAccount _giver;
         private double _money;
 
-        public FactoryCreateTransfer(AbstractAccount sender, AbstractAccount giver, double money)
+        public TransferFactory(AbstractAccount sender, AbstractAccount giver, double money)
         {
             _sender = sender;
             _giver = giver;

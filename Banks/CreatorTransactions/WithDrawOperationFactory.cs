@@ -1,11 +1,11 @@
 namespace Banks
 {
-    public class FactoryCreateAddMoneyOperation : IFactoryCreatorTransaction
+    public class WithDrawOperationFactory : ITransactionFactory
     {
         private AbstractAccount _account;
         private double _money;
 
-        public FactoryCreateAddMoneyOperation(AbstractAccount account, double money)
+        public WithDrawOperationFactory(AbstractAccount account, double money)
         {
             _account = account;
             _money = money;
@@ -13,7 +13,7 @@ namespace Banks
 
         public ITransaction Create()
         {
-            return new AddMoney(_account, _money);
+            return new WithDrawMoney(_account, _money);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Banks
     public interface ICentralBank
     {
         void UpdateMoneyInformation(DateTime newDate);
-        ITransaction MakeTransaction(IFactoryCreatorTransaction creatorTransaction);
+        ITransaction MakeTransaction(ITransactionFactory creatorTransaction);
         void CancelTransaction(ITransaction transaction);
         void AddBank(Bank bank);
         List<Bank> GetBanks();

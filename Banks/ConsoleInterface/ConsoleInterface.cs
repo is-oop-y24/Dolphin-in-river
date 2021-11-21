@@ -241,10 +241,10 @@ namespace Banks
             switch (typeAccountCreator)
             {
                 case "Add Money":
-                    _centralBank.MakeTransaction(new FactoryCreateAddMoneyOperation(giver, money));
+                    _centralBank.MakeTransaction(new AddMoneyOperationFactory(giver, money));
                     break;
                 case "With Draw":
-                    _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(giver, money));
+                    _centralBank.MakeTransaction(new WithDrawOperationFactory(giver, money));
                     break;
                 case "Transfer Money between accounts":
                     AbstractAccount sender = FindAccount();
@@ -253,7 +253,7 @@ namespace Banks
                         throw new BanksException("You couldn't transfer money for your account");
                     }
 
-                    _centralBank.MakeTransaction(new FactoryCreateTransfer(sender, giver, money));
+                    _centralBank.MakeTransaction(new TransferFactory(sender, giver, money));
                     break;
                 default:
                     throw new BanksException("Error in input data");

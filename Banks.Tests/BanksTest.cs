@@ -56,7 +56,7 @@ namespace Banks.Tests
                 AbstractAccount newDebitAccount =
                     _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(100000));
                 
-                _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDebitAccount, 12000));
+                _centralBank.MakeTransaction(new WithDrawOperationFactory(newDebitAccount, 12000));
                 Assert.Pass();
             });
         }
@@ -76,7 +76,7 @@ namespace Banks.Tests
                 .GetResult();
             AbstractAccount newDebitAccount =
                 _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(100000));
-            _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDebitAccount, 20000));
+            _centralBank.MakeTransaction(new WithDrawOperationFactory(newDebitAccount, 20000));
             Assert.AreEqual(80000, newDebitAccount.Money);
         }
 
@@ -165,7 +165,7 @@ namespace Banks.Tests
                 AbstractAccount newDepositAccount =
                     _centralBank.AddClientAndLinkAccount(bank, client, new DepositAccountFactory(100000, finishDay));
                 _centralBank.UpdateMoneyInformation(nowDate.AddDays(30));
-                _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDepositAccount, 20000));
+                _centralBank.MakeTransaction(new WithDrawOperationFactory(newDepositAccount, 20000));
             });
         }
 
@@ -188,7 +188,7 @@ namespace Banks.Tests
                 _centralBank.AddClientAndLinkAccount(bank, client, new DepositAccountFactory(100000, finishDay));
             _centralBank.UpdateMoneyInformation(nowDate.AddDays(365));
             Assert.AreEqual(107200, newDepositAccount.Money);
-            _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDepositAccount, 20000));
+            _centralBank.MakeTransaction(new WithDrawOperationFactory(newDepositAccount, 20000));
             Assert.AreEqual(87200, newDepositAccount.Money);
         }
 
@@ -210,7 +210,7 @@ namespace Banks.Tests
             AbstractAccount secondDebitAccount =
                 _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(200000));
             ITransaction transaction =
-                _centralBank.MakeTransaction(new FactoryCreateTransfer(firstDebitAccount, secondDebitAccount, 50000));
+                _centralBank.MakeTransaction(new TransferFactory(firstDebitAccount, secondDebitAccount, 50000));
             Assert.AreEqual(50000, firstDebitAccount.Money);
             Assert.AreEqual(250000, secondDebitAccount.Money);
             _centralBank.CancelTransaction(transaction);

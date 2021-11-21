@@ -89,7 +89,7 @@ namespace Banks
             return names;
         }
 
-        public ITransaction MakeTransaction(IFactoryCreatorTransaction creatorTransaction)
+        public ITransaction MakeTransaction(ITransactionFactory creatorTransaction)
         {
             ITransaction transaction = creatorTransaction.Create();
             if (transaction.GetTypeTransaction().Equals(TypeTransactions.Transfer))

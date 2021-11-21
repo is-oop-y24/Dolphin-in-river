@@ -1,6 +1,6 @@
 namespace Banks
 {
-    public interface IFactoryCreatorTransaction
+    public interface ITransactionFactory
     {
         ITransaction Create();
     }
