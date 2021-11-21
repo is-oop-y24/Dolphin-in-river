@@ -3,14 +3,6 @@ using Banks.Tools;
 
 namespace Banks
 {
-    public enum TypeAccounts
-    {
-        Debit,
-        Deposit,
-        Credit,
-        AllType,
-    }
-
     public abstract class AbstractAccount
     {
         protected const int MakePercent = 100;

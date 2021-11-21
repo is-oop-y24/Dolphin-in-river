@@ -1,12 +1,5 @@
 namespace Banks
 {
-    public enum TypeTransactions
-    {
-        AddMoney,
-        WithDraw,
-        Transfer,
-    }
-
     public interface ITransaction
     {
         void Cancel();
