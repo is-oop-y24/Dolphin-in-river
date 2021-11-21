@@ -379,19 +379,19 @@ namespace Banks
                             .PageSize(typesAccount.Count)
                             .AddChoices(typesAccount));
                     double money = AnsiConsole.Ask<double>("How many money do you want to put to account? ");
-                    FactoryAbstractCreateAccount createAccount;
+                    AbstractAccountFactory createAccount;
                     switch (typeAccountCreator)
                     {
                         case "Debit":
-                            createAccount = new FactoryCreateDebitAccount(money);
+                            createAccount = new DebitAccountFactory(money);
                             break;
                         case "Deposit":
                             int finishDay =
                                 AnsiConsole.Ask<int>("For how many days do you want to open a Deposit Account = ");
-                            createAccount = new FactoryCreateDepositAccount(money, DateTime.Today.AddDays(finishDay));
+                            createAccount = new DepositAccountFactory(money, DateTime.Today.AddDays(finishDay));
                             break;
                         case "Credit":
-                            createAccount = new FactoryCreateCreditAccount(money);
+                            createAccount = new CreditAccountFactory(money);
                             break;
                         default:
                             throw new BanksException("Error in input data");

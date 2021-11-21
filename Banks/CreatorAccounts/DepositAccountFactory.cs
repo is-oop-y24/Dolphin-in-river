@@ -1,10 +1,10 @@
 using System;
 namespace Banks
 {
-    public class FactoryCreateDepositAccount : FactoryAbstractCreateAccount
+    public class DepositAccountFactory : AbstractAccountFactory
     {
         private DateTime _finishDay;
-        public FactoryCreateDepositAccount(double money, DateTime finishDay)
+        public DepositAccountFactory(double money, DateTime finishDay)
             : base(money)
         {
             _finishDay = finishDay;

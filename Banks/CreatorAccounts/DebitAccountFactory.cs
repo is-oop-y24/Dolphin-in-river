@@ -1,8 +1,8 @@
 namespace Banks
 {
-    public class FactoryCreateDebitAccount : FactoryAbstractCreateAccount
+    public class DebitAccountFactory : AbstractAccountFactory
     {
-        public FactoryCreateDebitAccount(double money)
+        public DebitAccountFactory(double money)
             : base(money)
         {
         }

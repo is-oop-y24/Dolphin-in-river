@@ -1,8 +1,8 @@
 namespace Banks
 {
-    public class FactoryCreateCreditAccount : FactoryAbstractCreateAccount
+    public class CreditAccountFactory : AbstractAccountFactory
     {
-        public FactoryCreateCreditAccount(double money)
+        public CreditAccountFactory(double money)
             : base(money)
         {
         }

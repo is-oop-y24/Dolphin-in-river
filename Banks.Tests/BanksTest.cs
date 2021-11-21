@@ -54,7 +54,7 @@ namespace Banks.Tests
                 Client client = clientBuilder.BuildName("Ivan").BuildSurname("Hryakov").BuildAddress("Orel")
                     .GetResult();
                 AbstractAccount newDebitAccount =
-                    _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateDebitAccount(100000));
+                    _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(100000));
                 
                 _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDebitAccount, 12000));
                 Assert.Pass();
@@ -75,7 +75,7 @@ namespace Banks.Tests
                 .BuildPassportNumber(123123)
                 .GetResult();
             AbstractAccount newDebitAccount =
-                _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateDebitAccount(100000));
+                _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(100000));
             _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDebitAccount, 20000));
             Assert.AreEqual(80000, newDebitAccount.Money);
         }
@@ -94,7 +94,7 @@ namespace Banks.Tests
                 .BuildPassportNumber(123123)
                 .GetResult();
             AbstractAccount newDebitAccount =
-                _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateDebitAccount(100000));
+                _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(100000));
             DateTime nowDate = DateTime.Today;
             nowDate = nowDate.AddDays(30);
             _centralBank.UpdateMoneyInformation(nowDate);
@@ -117,7 +117,7 @@ namespace Banks.Tests
             DateTime nowDate = DateTime.Today;
             DateTime finishDay = nowDate.AddDays(365);
             AbstractAccount newDepositAccount =
-                _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateDepositAccount(100000, finishDay));
+                _centralBank.AddClientAndLinkAccount(bank, client, new DepositAccountFactory(100000, finishDay));
 
             _centralBank.UpdateMoneyInformation(nowDate.AddDays(30));
             Assert.AreEqual(100600, newDepositAccount.Money);
@@ -138,7 +138,7 @@ namespace Banks.Tests
                 .GetResult();
             DateTime nowDate = DateTime.Today;
             AbstractAccount newCreditAccount =
-                _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateCreditAccount(100000));
+                _centralBank.AddClientAndLinkAccount(bank, client, new CreditAccountFactory(100000));
             newCreditAccount.WithDraw(110000);
             Assert.AreEqual(40000, newCreditAccount.Money);
             _centralBank.UpdateMoneyInformation(nowDate.AddDays(30)); 
@@ -163,7 +163,7 @@ namespace Banks.Tests
                 DateTime nowDate = DateTime.Today;
                 DateTime finishDay = nowDate.AddDays(365);
                 AbstractAccount newDepositAccount =
-                    _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateDepositAccount(100000, finishDay));
+                    _centralBank.AddClientAndLinkAccount(bank, client, new DepositAccountFactory(100000, finishDay));
                 _centralBank.UpdateMoneyInformation(nowDate.AddDays(30));
                 _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDepositAccount, 20000));
             });
@@ -185,7 +185,7 @@ namespace Banks.Tests
             DateTime nowDate = DateTime.Today;
             DateTime finishDay = nowDate.AddDays(365);
             AbstractAccount newDepositAccount =
-                _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateDepositAccount(100000, finishDay));
+                _centralBank.AddClientAndLinkAccount(bank, client, new DepositAccountFactory(100000, finishDay));
             _centralBank.UpdateMoneyInformation(nowDate.AddDays(365));
             _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDepositAccount, 20000));
             Assert.Pass();
@@ -205,9 +205,9 @@ namespace Banks.Tests
                 .BuildPassportNumber(123123)
                 .GetResult();
             AbstractAccount firstDebitAccount =
-                _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateDebitAccount(100000));
+                _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(100000));
             AbstractAccount secondDebitAccount =
-                _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateDebitAccount(200000));
+                _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(200000));
             ITransaction transaction =
                 _centralBank.MakeTransaction(new FactoryCreateTransfer(firstDebitAccount, secondDebitAccount, 50000));
             Assert.AreEqual(50000, firstDebitAccount.Money);
@@ -230,7 +230,7 @@ namespace Banks.Tests
                 .BuildPassportNumber(123123)
                 .GetResult();
             AbstractAccount newCreditAccount =
-                _centralBank.AddClientAndLinkAccount(bank, client, new FactoryCreateCreditAccount(100000));
+                _centralBank.AddClientAndLinkAccount(bank, client, new CreditAccountFactory(100000));
             bank.ChangeCriticalSum(50000);
             Assert.AreEqual(true, client.GetFlagNotification());
             Assert.AreEqual(50000,newCreditAccount.CriticalSum);

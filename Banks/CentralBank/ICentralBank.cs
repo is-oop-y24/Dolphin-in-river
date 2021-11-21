@@ -13,7 +13,7 @@ namespace Banks
         List<string> GetBanksNames();
         List<string> GetNamesTransaction();
         List<ITransaction> GetTransactions();
-        AbstractAccount AddClientAndLinkAccount(Bank bank, Client client, FactoryAbstractCreateAccount createAccount);
+        AbstractAccount AddClientAndLinkAccount(Bank bank, Client client, AbstractAccountFactory createAccount);
         Bank AddBank(string bankName, double debitPercent, DepositInfo depositInfo, double creditLimit, double creditCommission, double criticalSum);
     }
 }

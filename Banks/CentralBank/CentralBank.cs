@@ -117,7 +117,7 @@ namespace Banks
             throw new BanksException("This account don't exists");
         }
 
-        public AbstractAccount AddClientAndLinkAccount(Bank bank, Client client, FactoryAbstractCreateAccount createAccount)
+        public AbstractAccount AddClientAndLinkAccount(Bank bank, Client client, AbstractAccountFactory createAccount)
         {
             return bank.AddClientAndLinkAccount(client, createAccount);
         }
