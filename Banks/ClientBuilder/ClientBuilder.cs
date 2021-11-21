@@ -1,18 +1,17 @@
-using System;
 using Banks.Tools;
 
 namespace Banks
 {
-    public class ConcreteClientBuilder : IClientBuilder
+    public class ClientBuilder : IClientBuilder
     {
         private readonly Client _client;
 
-        public ConcreteClientBuilder()
+        public ClientBuilder()
         {
             _client = new Client();
         }
 
-        public ConcreteClientBuilder(string name, string surname, string address = default, int passportNumber = default)
+        public ClientBuilder(string name, string surname, string address = default, int passportNumber = default)
         {
             _client = new Client();
             BuildName(name).BuildSurname(surname).BuildAddress(address).BuildPassportNumber(passportNumber);

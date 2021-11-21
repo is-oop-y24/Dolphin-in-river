@@ -1,4 +1,4 @@
-namespace Banks.BankBuilder
+namespace Banks
 {
     public interface IBankBuilder
     {

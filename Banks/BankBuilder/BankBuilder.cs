@@ -1,15 +1,15 @@
-namespace Banks.BankBuilder
+namespace Banks
 {
-    public class ConcreteBankBuilder : IBankBuilder
+    public class BankBuilder : IBankBuilder
     {
         private readonly Bank _bank;
 
-        public ConcreteBankBuilder()
+        public BankBuilder()
         {
             _bank = new Bank();
         }
 
-        public ConcreteBankBuilder(string bankName, double debitPercent, DepositInfo depositInfo, double creditLimit, double creditCommission, double criticalSum)
+        public BankBuilder(string bankName, double debitPercent, DepositInfo depositInfo, double creditLimit, double creditCommission, double criticalSum)
         {
             _bank = new Bank();
             BuildName(bankName).BuildDebitPercent(debitPercent).BuildDepositInfo(depositInfo)

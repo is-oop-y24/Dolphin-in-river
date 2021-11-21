@@ -397,7 +397,7 @@ namespace Banks
                             throw new BanksException("Error in input data");
                     }
 
-                    var clientBuilder = new ConcreteClientBuilder();
+                    var clientBuilder = new ClientBuilder();
                     Client client = clientBuilder
                         .BuildName(AnsiConsole.Ask<string>("Client Name (required field) is = "))
                         .BuildSurname(AnsiConsole.Ask<string>("Client Surname (required field) is = "))
