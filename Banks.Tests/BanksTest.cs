@@ -187,8 +187,9 @@ namespace Banks.Tests
             AbstractAccount newDepositAccount =
                 _centralBank.AddClientAndLinkAccount(bank, client, new DepositAccountFactory(100000, finishDay));
             _centralBank.UpdateMoneyInformation(nowDate.AddDays(365));
+            Assert.AreEqual(107200, newDepositAccount.Money);
             _centralBank.MakeTransaction(new FactoryCreateWithDrawOperation(newDepositAccount, 20000));
-            Assert.Pass();
+            Assert.AreEqual(87200, newDepositAccount.Money);
         }
 
         [Test]
