@@ -16,7 +16,6 @@ namespace Banks
             _money = money;
             _id = _nextId++;
             _type = TypeTransactions.AddMoney;
-            DoTransact();
         }
 
         public string GetInformation()
@@ -45,7 +44,7 @@ namespace Banks
             _account.WithDraw(_money);
         }
 
-        private void DoTransact()
+        public void DoTransact()
         {
             if (_money < 0)
             {

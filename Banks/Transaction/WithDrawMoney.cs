@@ -17,7 +17,6 @@ namespace Banks
             _money = money;
             _id = _nextId++;
             _type = TypeTransactions.WithDraw;
-            DoTransact();
         }
 
         public void Cancel()
@@ -46,7 +45,7 @@ namespace Banks
             return _id;
         }
 
-        private void DoTransact()
+        public void DoTransact()
         {
             if (_money < 0)
             {

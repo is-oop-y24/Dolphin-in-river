@@ -92,6 +92,7 @@ namespace Banks
         public ITransaction MakeTransaction(ITransactionFactory creatorTransaction)
         {
             ITransaction transaction = creatorTransaction.Create();
+            transaction.DoTransact();
             if (transaction.GetTypeTransaction().Equals(TypeTransactions.Transfer))
             {
                 var transfer = (Transfer)transaction;

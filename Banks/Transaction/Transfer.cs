@@ -20,7 +20,6 @@ namespace Banks
             _money = money;
             _id = _nextId++;
             _type = TypeTransactions.Transfer;
-            DoTransact();
         }
 
         public int GetId()
@@ -60,7 +59,7 @@ namespace Banks
             _giver.WithDraw(_money);
         }
 
-        private void DoTransact()
+        public void DoTransact()
         {
             if (_money < 0)
             {

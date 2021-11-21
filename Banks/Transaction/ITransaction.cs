@@ -7,5 +7,6 @@ namespace Banks
 
         TypeTransactions GetTypeTransaction();
         string GetInformation();
+        void DoTransact();
     }
 }

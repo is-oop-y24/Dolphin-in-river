@@ -57,7 +57,6 @@ namespace Banks.Tests
                     _centralBank.AddClientAndLinkAccount(bank, client, new DebitAccountFactory(100000));
                 
                 _centralBank.MakeTransaction(new WithDrawOperationFactory(newDebitAccount, 12000));
-                Assert.Pass();
             });
         }
 
