@@ -10,6 +10,10 @@ namespace Backups
         private static int _nextId = 0;
         private int _id;
 
+        public SingleRestorePoint()
+        {
+        }
+
         public SingleRestorePoint(List<string> directoryFiles, int numberRestorePoint, Repository repository, bool localKeep)
             : base(directoryFiles, numberRestorePoint, repository, localKeep)
         {

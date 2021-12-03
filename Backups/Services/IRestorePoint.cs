@@ -5,6 +5,10 @@ namespace Backups
 {
     public abstract class IRestorePoint
     {
+        public IRestorePoint()
+        {
+        }
+
         public IRestorePoint(List<string> directoryFiles, int numberRestorePoint, Repository repository, bool localKeep)
         {
             DirectoryFiles = directoryFiles;
@@ -17,26 +21,31 @@ namespace Backups
         public Repository CurrentRepository
         {
             get;
+            set;
         }
 
-        protected DateTime CreateDataTime
+        public DateTime CreateDataTime
         {
             get;
+            set;
         }
 
-        protected List<string> DirectoryFiles
+        public List<string> DirectoryFiles
         {
             get;
+            set;
         }
 
-        protected int NumberRestorePoint
+        public int NumberRestorePoint
         {
             get;
+            set;
         }
 
-        protected bool CurrentLocalKeep
+        public bool CurrentLocalKeep
         {
             get;
+            set;
         }
     }
 }

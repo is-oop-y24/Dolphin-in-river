@@ -8,46 +8,71 @@ namespace Backups
 {
     public class BackupJob
     {
-        private List<IRestorePoint> _points = new List<IRestorePoint>();
-        private List<string> _files;
-        private ICreateRestorePoint _point;
-        private Repository _repository = null;
-        private bool _localKeep;
-
         public BackupJob(List<string> file, ICreateRestorePoint point, string path, bool localKeep)
         {
-            _files = file;
-            _point = point;
-            _localKeep = localKeep;
-            _repository = new Repository(path);
+            Files = file;
+            Point = point;
+            LocalKeep = localKeep;
+            Points = new List<IRestorePoint>();
+            Repository = new Repository(path);
+        }
+
+        public List<IRestorePoint> Points
+        {
+            get;
+            set;
+        }
+
+        public List<string> Files
+        {
+            get;
+            set;
+        }
+
+        public ICreateRestorePoint Point
+        {
+            get;
+            set;
+        }
+
+        public Repository Repository
+        {
+            get;
+            set;
+        }
+
+        public bool LocalKeep
+        {
+            get;
+            set;
         }
 
         public IRestorePoint CreateRestorePoint()
         {
-            if (_repository == null)
+            if (Repository == null)
             {
                 throw new BackupsException("Not directory storage");
             }
 
-            var files = new List<string>(_files);
-            IRestorePoint resultPoint = _point.CreateRestorePoint(files, _points.Count + 1, _repository, _localKeep);
-            _points.Add(resultPoint);
+            var files = new List<string>(Files);
+            IRestorePoint resultPoint = Point.CreateRestorePoint(files, Points.Count + 1, Repository, LocalKeep);
+            Points.Add(resultPoint);
             return resultPoint;
         }
 
         public void DeleteFileInBackupJob(string directoryFile)
         {
-            _files.Remove(directoryFile);
+            Files.Remove(directoryFile);
         }
 
         public int AmountPoints()
         {
-            return _points.Count;
+            return Points.Count;
         }
 
         public int AmountStorage()
         {
-            return _repository.GetCount();
+            return Repository.GetCount();
         }
     }
 }
