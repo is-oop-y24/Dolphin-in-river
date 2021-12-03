@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Backups;
 using BackupsExtra.CleanAlgorithmFactory;
 using BackupsExtra.CleanRestorePoints;

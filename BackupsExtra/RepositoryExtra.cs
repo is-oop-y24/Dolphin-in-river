@@ -146,13 +146,13 @@ namespace BackupsExtra
 
         private string GetName(string directoryName)
         {
-            string s = null;
+            string name = null;
             for (int i = directoryName.LastIndexOf("/") + 1; i < directoryName.Length; i++)
             {
-                s += directoryName[i];
+                name += directoryName[i];
             }
 
-            return s;
+            return name;
         }
 
         private Dictionary<string, string> GetTableForRecoveryToDifferentLocation(IRecovery recoveryInfo, string pathToRestorePoint)
@@ -169,13 +169,13 @@ namespace BackupsExtra
 
         private string GetNameDirectory(string directoryName)
         {
-            string s = null;
+            string name = null;
             for (int i = 0; i < directoryName.LastIndexOf("/") + 1; i++)
             {
-                s += directoryName[i];
+                name += directoryName[i];
             }
 
-            return s;
+            return name;
         }
 
         private void CheckExistDirectoryToZipArchive(string path)
