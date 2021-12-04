@@ -17,5 +17,7 @@ namespace BackupsExtra.Logging
             get;
             set;
         }
+
+        public abstract void ExecuteLogging(string message);
     }
 }

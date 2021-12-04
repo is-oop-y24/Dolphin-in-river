@@ -50,7 +50,7 @@ namespace BackupsExtra
                 listRecoveryZipFiles = GetTableForRecoveryToDifferentLocation(recoveryInfo, pathToRestorePoint);
             }
 
-            ExecuteLoggingRecovery(listRecoveryZipFiles);
+            Logging.ExecuteLogging(GetMessageForLogging(listRecoveryZipFiles));
             RecoveryFilesFromSplitRestore(listRecoveryZipFiles);
 
             Directory.Delete(point.CurrentRepository.Path + point.NumberRestorePoint + "_SplitRestorePoint/", true);
@@ -87,7 +87,7 @@ namespace BackupsExtra
                 listRecoveryZipFiles = GetTableForRecoveryToDifferentLocation(recoveryInfo, newPath);
             }
 
-            ExecuteLoggingRecovery(listRecoveryZipFiles);
+            Logging.ExecuteLogging(GetMessageForLogging(listRecoveryZipFiles));
             RecoveryFilesFromSingleRestore(listRecoveryZipFiles);
             Directory.Delete(newPath, true);
 
@@ -222,7 +222,7 @@ namespace BackupsExtra
             }
         }
 
-        private void ExecuteLoggingRecovery(Dictionary<string, string> listRecoveryFiles)
+        private string GetMessageForLogging(Dictionary<string, string> listRecoveryFiles)
         {
             string message = null;
             if (listRecoveryFiles.Count == 0)
@@ -240,18 +240,7 @@ namespace BackupsExtra
                 message += item.Key + " has been restored to " + item.Value + Environment.NewLine;
             }
 
-            if (Logging.TypeLogging.Equals(TypeLogging.ConsoleLogging))
-            {
-                Console.WriteLine(message);
-            }
-            else
-            {
-                var loggingToFile = (FileLogging)Logging;
-                var fileStream = new FileStream(loggingToFile.FilePath, FileMode.Append);
-                byte[] array = System.Text.Encoding.Default.GetBytes(message);
-                fileStream.Write(array, 0, array.Length);
-                fileStream.Dispose();
-            }
+            return message;
         }
     }
 }

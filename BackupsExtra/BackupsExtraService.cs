@@ -41,7 +41,7 @@ namespace BackupsExtra
                 });
 
             _extraBackupJobs.Add(newExtraBackupJob);
-            ExecuteLoggingDeserialize(newExtraBackupJob);
+            newExtraBackupJob.Logging.ExecuteLogging(GetDeserializeMessageForLogging(newExtraBackupJob.Logging.Configuration));
             return newExtraBackupJob;
         }
 
@@ -62,7 +62,7 @@ namespace BackupsExtra
             byte[] array = System.Text.Encoding.Default.GetBytes(output);
             fileStream.Write(array, 0, array.Length);
             fileStream.Dispose();
-            ExecuteLoggingSerialize(extraBackupJob);
+            extraBackupJob.Logging.ExecuteLogging(GetSerializeMessageForLogging(extraBackupJob.Logging.Configuration));
         }
 
         public List<ExtraBackupJob> GetExtraBackupJobs()
@@ -78,50 +78,28 @@ namespace BackupsExtra
             }
         }
 
-        private void ExecuteLoggingSerialize(ExtraBackupJob extraBackupJob)
+        private string GetSerializeMessageForLogging(bool loggingConfiguration)
         {
             string text = null;
-            if (extraBackupJob.Logging.Configuration)
+            if (loggingConfiguration)
             {
                 text += DateTime.Now + ", ";
             }
 
             text += "Serialize Extra Backup Job" + Environment.NewLine;
-            if (extraBackupJob.Logging.TypeLogging.Equals(TypeLogging.ConsoleLogging))
-            {
-                Console.WriteLine(text);
-            }
-            else
-            {
-                var loggingToFile = (FileLogging)extraBackupJob.Logging;
-                var fileStream = new FileStream(loggingToFile.FilePath, FileMode.Append);
-                byte[] array = System.Text.Encoding.Default.GetBytes(text);
-                fileStream.Write(array, 0, array.Length);
-                fileStream.Dispose();
-            }
+            return text;
         }
 
-        private void ExecuteLoggingDeserialize(ExtraBackupJob extraBackupJob)
+        private string GetDeserializeMessageForLogging(bool loggingConfiguration)
         {
             string text = null;
-            if (extraBackupJob.Logging.Configuration)
+            if (loggingConfiguration)
             {
                 text += DateTime.Now + ", ";
             }
 
             text += "Deserialize Extra Backup Job" + Environment.NewLine;
-            if (extraBackupJob.Logging.TypeLogging.Equals(TypeLogging.ConsoleLogging))
-            {
-                Console.WriteLine(text);
-            }
-            else
-            {
-                var loggingToFile = (FileLogging)extraBackupJob.Logging;
-                var fileStream = new FileStream(loggingToFile.FilePath, FileMode.Append);
-                byte[] array = System.Text.Encoding.Default.GetBytes(text);
-                fileStream.Write(array, 0, array.Length);
-                fileStream.Dispose();
-            }
+            return text;
         }
     }
 }

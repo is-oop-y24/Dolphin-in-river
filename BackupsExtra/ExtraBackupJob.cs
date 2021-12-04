@@ -45,7 +45,7 @@ namespace BackupsExtra
             IRestorePoint newPoint = SimpleBackupsJob.CreateRestorePoint();
             var newExtraPoint = new RestorePointWithDateCreation(newPoint, Logging);
             PointsWithDateTime.Add(newExtraPoint);
-            newExtraPoint.ExecuteLoggingCreationPoint();
+            Logging.ExecuteLogging(newExtraPoint.GetMessageForLogging());
             return newPoint;
         }
 

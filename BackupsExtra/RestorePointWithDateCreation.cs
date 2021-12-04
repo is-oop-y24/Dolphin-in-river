@@ -42,7 +42,7 @@ namespace BackupsExtra
             NewRepository.RecoverSinglePoint(recoveryInfo, Point);
         }
 
-        public void ExecuteLoggingCreationPoint()
+        public string GetMessageForLogging()
         {
             string text = null;
             if (Logging.Configuration)
@@ -51,18 +51,7 @@ namespace BackupsExtra
             }
 
             text += Point.GetType() + " has been created" + Environment.NewLine;
-            if (Logging.TypeLogging.Equals(TypeLogging.ConsoleLogging))
-            {
-                Console.WriteLine(text);
-            }
-            else
-            {
-                var loggingToFile = (FileLogging)Logging;
-                var fileStream = new FileStream(loggingToFile.FilePath, FileMode.Append);
-                byte[] array = System.Text.Encoding.Default.GetBytes(text);
-                fileStream.Write(array, 0, array.Length);
-                fileStream.Dispose();
-            }
+            return text;
         }
     }
 }
