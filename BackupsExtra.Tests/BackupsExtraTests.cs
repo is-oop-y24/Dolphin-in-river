@@ -21,8 +21,8 @@ namespace BackupsExtra.Tests
         [Test]
         public void CheckCorrectAmountCleanAlgorithm()
         {
-            string directory1 = "C:/Users/Иван/Desktop/1.txt";
-            string directory2 = "C:/Users/Иван/Desktop/2.txt";
+            string directory1 = "./1.txt";
+            string directory2 = "./2.txt";
             var listFile = new List<string>
             {
                 directory1,
@@ -37,7 +37,7 @@ namespace BackupsExtra.Tests
             };
             var extraBackupService = new BackupsExtraService();
             ExtraBackupJob extraBackupJob = extraBackupService.AddExtraBackupJob(listFile, point,
-                "C:/Users/Иван/Desktop/", localKeep, consoleLogging);
+                "./", localKeep, consoleLogging);
 
             extraBackupJob.CreateRestorePoint();
             extraBackupJob.DeleteFileInBackupJob(directory1);
@@ -52,8 +52,8 @@ namespace BackupsExtra.Tests
         {
             Assert.Catch<BackupsExtraException>(() =>
             {
-                string directory1 = "C:/Users/Иван/Desktop/1.txt";
-                string directory2 = "C:/Users/Иван/Desktop/2.txt";
+                string directory1 = "./1.txt";
+                string directory2 = "./2.txt";
                 var listFile = new List<string>
                 {
                     directory1,
@@ -68,7 +68,7 @@ namespace BackupsExtra.Tests
                 };
                 var extraBackupService = new BackupsExtraService();
                 ExtraBackupJob extraBackupJob = extraBackupService.AddExtraBackupJob(listFile, point,
-                    "C:/Users/Иван/Desktop/", localKeep, consoleLogging);
+                    "./", localKeep, consoleLogging);
 
                 extraBackupJob.CreateRestorePoint();
                 extraBackupJob.DeleteFileInBackupJob(directory1);
@@ -85,8 +85,8 @@ namespace BackupsExtra.Tests
         {
             Assert.Catch<BackupsExtraException>(() =>
             {
-                string directory1 = "C:/Users/Иван/Desktop/1.txt";
-                string directory2 = "C:/Users/Иван/Desktop/2.txt";
+                string directory1 = "./1.txt";
+                string directory2 = "./2.txt";
                 var listFile = new List<string>
                 {
                     directory1,
@@ -101,7 +101,7 @@ namespace BackupsExtra.Tests
                 };
                 var extraBackupService = new BackupsExtraService();
                 ExtraBackupJob extraBackupJob = extraBackupService.AddExtraBackupJob(listFile, point,
-                    "C:/Users/Иван/Desktop/", localKeep, consoleLogging);
+                    "./", localKeep, consoleLogging);
 
                 extraBackupJob.CreateRestorePoint();
                 extraBackupJob.DeleteFileInBackupJob(directory1);
@@ -115,8 +115,8 @@ namespace BackupsExtra.Tests
         [Test]
         public void CheckCorrectBothRequirementsHybridCleanAlgorithm()
         {
-            string directory1 = "C:/Users/Иван/Desktop/1.txt";
-                string directory2 = "C:/Users/Иван/Desktop/2.txt";
+                string directory1 = "./1.txt";
+                string directory2 = "./2.txt";
                 var listFile = new List<string>
                 {
                     directory1,
@@ -131,7 +131,7 @@ namespace BackupsExtra.Tests
                 };
                 var extraBackupService = new BackupsExtraService();
                 ExtraBackupJob extraBackupJob = extraBackupService.AddExtraBackupJob(listFile, point,
-                    "C:/Users/Иван/Desktop/", localKeep, consoleLogging);
+                    "./", localKeep, consoleLogging);
 
                 extraBackupJob.CreateRestorePoint();
                 extraBackupJob.DeleteFileInBackupJob(directory1);
@@ -145,8 +145,8 @@ namespace BackupsExtra.Tests
         [Test]
         public void CheckCorrectMergePoint()
         {
-            string directory1 = "C:/Users/Иван/Desktop/1.txt";
-            string directory2 = "C:/Users/Иван/Desktop/2.txt";
+            string directory1 = "./1.txt";
+            string directory2 = "./2.txt";
             var listFile = new List<string>
             {
                 directory1,
@@ -161,7 +161,7 @@ namespace BackupsExtra.Tests
             };
             var extraBackupService = new BackupsExtraService();
             ExtraBackupJob extraBackupJob = extraBackupService.AddExtraBackupJob(listFile, point,
-                "C:/Users/Иван/Desktop/", localKeep, consoleLogging);
+                "./", localKeep, consoleLogging);
 
             extraBackupJob.CreateRestorePoint();
             extraBackupJob.DeleteFileInBackupJob(directory1);
