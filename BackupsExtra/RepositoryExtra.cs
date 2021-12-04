@@ -14,12 +14,12 @@ namespace BackupsExtra
         {
         }
 
-        public RepositoryExtra(AbstractClassLogging logging)
+        public RepositoryExtra(AbstractLogging logging)
         {
             Logging = logging;
         }
 
-        public AbstractClassLogging Logging
+        public AbstractLogging Logging
         {
             get;
             set;

@@ -1,8 +1,8 @@
 namespace BackupsExtra.Logging
 {
-    public abstract class AbstractClassLogging
+    public abstract class AbstractLogging
     {
-        public AbstractClassLogging()
+        public AbstractLogging()
         {
         }
 

@@ -17,7 +17,7 @@ namespace BackupsExtra
             _extraBackupJobs = new List<ExtraBackupJob>();
         }
 
-        public ExtraBackupJob AddExtraBackupJob(List<string> file, ICreateRestorePoint point, string path, bool localKeep, AbstractClassLogging logging)
+        public ExtraBackupJob AddExtraBackupJob(List<string> file, ICreateRestorePoint point, string path, bool localKeep, AbstractLogging logging)
         {
             var newExtraBackupJob = new ExtraBackupJob(file, point, path, localKeep, logging);
             _extraBackupJobs.Add(newExtraBackupJob);

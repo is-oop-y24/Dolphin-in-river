@@ -7,7 +7,7 @@ namespace BackupsExtra
 {
     public class RestorePointWithDateCreation
     {
-        public RestorePointWithDateCreation(IRestorePoint point, AbstractClassLogging logging)
+        public RestorePointWithDateCreation(IRestorePoint point, AbstractLogging logging)
         {
             Point = point;
             Logging = logging;
@@ -20,7 +20,7 @@ namespace BackupsExtra
             set;
         }
 
-        public AbstractClassLogging Logging
+        public AbstractLogging Logging
         {
             get;
             set;

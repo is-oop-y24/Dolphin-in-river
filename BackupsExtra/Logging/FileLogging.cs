@@ -1,6 +1,6 @@
 namespace BackupsExtra.Logging
 {
-    public class FileLogging : AbstractClassLogging
+    public class FileLogging : AbstractLogging
     {
         public FileLogging(string filePath)
         {

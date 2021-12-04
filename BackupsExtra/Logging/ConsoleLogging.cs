@@ -1,6 +1,6 @@
 namespace BackupsExtra.Logging
 {
-    public class ConsoleLogging : AbstractClassLogging
+    public class ConsoleLogging : AbstractLogging
     {
         public ConsoleLogging()
         {

@@ -9,7 +9,7 @@ namespace BackupsExtra
 {
     public class ExtraBackupJob
     {
-        public ExtraBackupJob(List<string> file, ICreateRestorePoint point, string path, bool localKeep, AbstractClassLogging logging)
+        public ExtraBackupJob(List<string> file, ICreateRestorePoint point, string path, bool localKeep, AbstractLogging logging)
         {
             SimpleBackupsJob = new BackupJob(file, point, path, localKeep);
             PointsWithDateTime = new List<RestorePointWithDateCreation>();
@@ -28,7 +28,7 @@ namespace BackupsExtra
             private set;
         }
 
-        public AbstractClassLogging Logging
+        public AbstractLogging Logging
         {
             get;
             set;
