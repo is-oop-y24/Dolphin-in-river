@@ -3,11 +3,11 @@ using BackupsExtra.CleanRestorePoints;
 
 namespace BackupsExtra.CleanAlgorithmFactory
 {
-    public class OnesHybridAlgorithmFactory : ICleanAlgorithmFactory
+    public class OnesRequirementHybridCleanAlgorithmFactory : ICleanAlgorithmFactory
     {
         private int _amountRestorePoint;
         private DateTime _finishDate;
-        public OnesHybridAlgorithmFactory(int amountRestorePoint, DateTime finishDate)
+        public OnesRequirementHybridCleanAlgorithmFactory(int amountRestorePoint, DateTime finishDate)
         {
             _amountRestorePoint = amountRestorePoint;
             _finishDate = finishDate;
@@ -20,7 +20,7 @@ namespace BackupsExtra.CleanAlgorithmFactory
 
         public AbstractCleanAlgorithm Create()
         {
-            return new OnesHybridCleanAlgorithm(_amountRestorePoint, _finishDate);
+            return new OnesRequirementHybridCleanAlgorithm(_amountRestorePoint, _finishDate);
         }
     }
 }

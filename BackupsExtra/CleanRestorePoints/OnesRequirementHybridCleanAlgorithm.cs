@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace BackupsExtra.CleanRestorePoints
 {
-    public class OnesHybridCleanAlgorithm : AbstractCleanAlgorithm
+    public class OnesRequirementHybridCleanAlgorithm : AbstractCleanAlgorithm
     {
         private int _amountRestorePoint;
         private DateTime _finishDate;
 
-        public OnesHybridCleanAlgorithm(int amountRestorePoint, DateTime finishDate)
+        public OnesRequirementHybridCleanAlgorithm(int amountRestorePoint, DateTime finishDate)
         {
             _amountRestorePoint = amountRestorePoint;
             _finishDate = finishDate;

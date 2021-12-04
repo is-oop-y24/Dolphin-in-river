@@ -108,7 +108,7 @@ namespace BackupsExtra.Tests
                 extraBackupJob.CreateRestorePoint();
                 extraBackupJob.CreateRestorePoint();
                 extraBackupJob.CreateRestorePoint();
-                extraBackupJob.ExecuteCleanAlgorithm(new OnesHybridAlgorithmFactory(2, DateTime.Now.AddDays(100)));
+                extraBackupJob.ExecuteCleanAlgorithm(new OnesRequirementHybridCleanAlgorithmFactory(2, DateTime.Now.AddDays(100)));
             });
         }
         
