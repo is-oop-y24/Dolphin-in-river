@@ -6,19 +6,19 @@ namespace Backups
 {
     public class Repository
     {
-        private string _path;
         private List<IStorageFilesInMemory> _storages = new List<IStorageFilesInMemory>();
         private bool _localKeep;
         private int _countFilesInLocal;
 
         public Repository(string path)
         {
-            _path = path;
+            Path = path;
         }
 
-        public string GetPath()
+        public string Path
         {
-            return _path;
+            get;
+            set;
         }
 
         public void CreateSingleStorage(bool localKeep, int numberRestorePoint, int id, List<string> directoryFiles)
@@ -27,10 +27,10 @@ namespace Backups
             _countFilesInLocal += directoryFiles.Count;
             if (localKeep)
             {
-                var dirInfo = new DirectoryInfo(_path);
+                var dirInfo = new DirectoryInfo(Path);
                 dirInfo.CreateSubdirectory(numberRestorePoint + "_SingleRestorePoint/");
                 string archivePath =
-                    _path + numberRestorePoint + "_SingleRestorePoint/" + id + ".zip";
+                    Path + numberRestorePoint + "_SingleRestorePoint/" + id + ".zip";
                 ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Create);
                 foreach (string item in directoryFiles)
                 {
@@ -52,11 +52,11 @@ namespace Backups
             _countFilesInLocal += directoryFiles.Count;
             if (localKeep)
             {
-                var dirInfo = new DirectoryInfo(_path);
+                var dirInfo = new DirectoryInfo(Path);
                 dirInfo.CreateSubdirectory(numberRestorePoint + "_SplitRestorePoint/");
                 foreach (string item in directoryFiles)
                 {
-                    string archivePath = _path + numberRestorePoint + "_SplitRestorePoint/" +
+                    string archivePath = Path + numberRestorePoint + "_SplitRestorePoint/" +
                                          GetName(item) + ".zip";
                     ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Create);
                     archive.CreateEntryFromFile(item, numberRestorePoint + "_" + GetName(item));
