@@ -67,17 +67,17 @@ namespace Reports.DAL.Entities
                 return;
             }
 
-            throw new Exception("I can't add this employee");
+            throw new ReportsDalExceptions("I can't add this employee");
         }
 
         public override Guid GetDirectorId()
         {
-            throw new Exception("This person hasn't Director Id");
+            throw new ReportsDalExceptions("This person hasn't Director Id");
         }
 
         public override void SetDirectorId(Guid newId)
         {
-            throw new Exception("This person hasn't Director Id");
+            throw new ReportsDalExceptions("This person hasn't Director Id");
         }
 
         public override List<AbstractEmployee> GetEmployees()
