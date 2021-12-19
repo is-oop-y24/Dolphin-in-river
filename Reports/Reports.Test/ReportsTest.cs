@@ -79,5 +79,35 @@ namespace ReportsTest
             firstEmployee.CloseReport();
             Assert.AreEqual(false, firstEmployee.MyReport.Open);
         }
+
+        [Test]
+        public void CheckCorrectStorageAtLocalMemory()
+        {
+            IReportService _reportService = new ReportService();
+            TaskService taskService = _reportService.GetTaskService();
+            EmployeeService employeeService = _reportService.GetEmployeeService();
+            TeamLead firstTeamLead = employeeService.CreateTeamLead("First Team Lead");
+            Employee firstEmployee = employeeService.CreateEmployeeForTeamLead(firstTeamLead, "FirstEmployee");
+            Employee secondEmployee = employeeService.CreateEmployeeForTeamLead(firstTeamLead, "SecondEmployee");
+            Task firstTask = taskService.CreateTask(firstTeamLead);
+            Task secondTask = taskService.CreateTask(firstEmployee);
+            Task thirdTask = taskService.CreateTask(secondEmployee);
+            firstEmployee.SaveNewReportForSomeDays(7);
+            firstEmployee.CloseReport();
+            secondEmployee.SaveNewReportForSomeDays(7);
+            secondEmployee.CloseReport();
+            firstEmployee.SaveNewReportForSomeDays(1);
+            firstEmployee.CloseReport();
+            secondEmployee.SaveNewReportForSomeDays(1);
+            firstEmployee.SaveNewReportForSomeDays(7);
+            firstEmployee.CloseReport();
+            var repository = new Repository();
+            repository.SerializeEmployeeService("./reserve_copy.json", employeeService);
+            EmployeeService newEmployeeService =
+                repository.DeserializeEmployeeService("./reserve_copy.json");
+            Assert.AreEqual(employeeService.TeamLeads.Count, newEmployeeService.TeamLeads.Count);
+            Assert.AreEqual(employeeService.FindByName("First Team Lead").Id,
+                newEmployeeService.FindByName("First Team Lead").Id);
+        }
     }
 }

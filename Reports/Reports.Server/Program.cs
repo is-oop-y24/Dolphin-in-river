@@ -17,7 +17,6 @@ namespace Reports.Server
     {
         public static void Main(string[] args)
         {
-            // CheckCorrectStorageAtLocalMemory();
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -27,34 +26,5 @@ namespace Reports.Server
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-
-        public static void CheckCorrectStorageAtLocalMemory()
-        {
-            IReportService _reportService = new ReportService();
-            TaskService taskService = _reportService.GetTaskService();
-            EmployeeService employeeService = _reportService.GetEmployeeService();
-            TeamLead firstTeamLead = employeeService.CreateTeamLead("First Team Lead");
-            Employee firstEmployee = employeeService.CreateEmployeeForTeamLead(firstTeamLead, "FirstEmployee");
-            Employee secondEmployee = employeeService.CreateEmployeeForTeamLead(firstTeamLead, "SecondEmployee");
-            DAL.Entities.Task firstTask = taskService.CreateTask(firstTeamLead);
-            DAL.Entities.Task secondTask = taskService.CreateTask(firstEmployee);
-            DAL.Entities.Task thirdTask = taskService.CreateTask(secondEmployee);
-            firstEmployee.SaveNewReportForSomeDays(7);
-            firstEmployee.CloseReport();
-            secondEmployee.SaveNewReportForSomeDays(7);
-            secondEmployee.CloseReport();
-            firstEmployee.SaveNewReportForSomeDays(1);
-            firstEmployee.CloseReport();
-            secondEmployee.SaveNewReportForSomeDays(1);
-            firstEmployee.SaveNewReportForSomeDays(7);
-            firstEmployee.CloseReport();
-            var repository = new Repository();
-            repository.SerializeEmployeeService("C:/Users/Иван/Desktop/out18.json", employeeService);
-            EmployeeService newEmployeeService =
-                repository.DeserializeEmployeeService("C:/Users/Иван/Desktop/out18.json");
-            Assert.AreEqual(employeeService.TeamLeads.Count, newEmployeeService.TeamLeads.Count);
-            Assert.AreEqual(employeeService.FindByName("First Team Lead").Id,
-                newEmployeeService.FindByName("First Team Lead").Id);
-        }
     }
 }

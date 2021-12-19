@@ -1,4 +1,5 @@
 using System.IO;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Newtonsoft.Json;
 using Reports.Server.Tools;
 
@@ -34,7 +35,7 @@ namespace Reports.Server.Services
         {
             if (File.Exists(pathToJson))
             {
-                throw new ReportServerException("This file has already exists");
+                File.Delete(pathToJson);
             }
 
             CheckNullPath(pathToJson);
