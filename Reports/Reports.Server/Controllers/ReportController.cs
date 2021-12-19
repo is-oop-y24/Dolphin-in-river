@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Reports.DAL.Entities;
 using Reports.Server.Services;
-using Reports.Server.Tools;
 
 namespace Reports.Server.Controllers
 {
@@ -12,8 +10,8 @@ namespace Reports.Server.Controllers
     [Route("/reports")]
     public class ReportController : ControllerBase
     {
-        private const string PathToStorageTask = "C:/Users/Иван/Desktop/tasks.json";
-        private const string PathToStorageTeamLeads = "C:/Users/Иван/Desktop/teamLeads.json";
+        private const string PathToStorageTask = "./tasks.json";
+        private const string PathToStorageTeamLeads = "./teamLeads.json";
         private ITaskService _taskService = new TaskService();
         private IEmployeeService _employeeService = new EmployeeService();
         private IReportService _reportService;

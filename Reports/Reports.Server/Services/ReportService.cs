@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using Newtonsoft.Json;
 using Reports.DAL.Entities;
-using Reports.DAL.Tools;
 using Reports.Server.Tools;
 
 namespace Reports.Server.Services

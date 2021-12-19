@@ -12,7 +12,7 @@ namespace Reports.Server.Controllers
     [Route("/employees")]
     public class EmployeeController : ControllerBase
     {
-        private const string PathToStorage = "C:/Users/Иван/Desktop/teamLeads.json";
+        private const string PathToStorage = "./teamLeads.json";
         private IEmployeeService _service;
 
         public EmployeeController(IEmployeeService service)
